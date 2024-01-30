@@ -10,16 +10,16 @@ Ububtu is a full-stack application using React for fronend and Flask for backend
 - User can interact with other users
 
 # REACT TREE DIAGRAM
-<img width="287" alt="Screen Shot 2024-01-30 at 1 30 38 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/96369972-8e03-4e9d-8429-4b5853e0366c">
+<img width="215" alt="Screen Shot 2024-01-30 at 4 16 49 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/c50b4bab-e322-43cc-81a9-f78e2c8c7f0b">
 
 # SCHEMA
-<img width="877" alt="Screen Shot 2024-01-30 at 1 33 18 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/9a40431c-4982-4a28-b4e3-c125db507189">
+
 
 # ROUTES
-<img width="640" alt="Screen Shot 2024-01-29 at 2 25 14 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/d98db0fd-a471-4e4c-974e-91b018b5d005">
+<img width="674" alt="Screen Shot 2024-01-30 at 4 21 06 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/7de6ace2-0924-498c-bc04-d1d5a385158d">
 
 # WIREFRAME
-<img width="289" alt="Screen Shot 2024-01-30 at 1 31 47 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/f6ae6d86-f3b5-4d16-8f84-11c24f6d81a1">
+<img width="269" alt="Screen Shot 2024-01-30 at 4 16 19 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/37999895-fd8d-410a-9851-07b56c86f735">
 
 # STRETCH GOALS
 1. create visual graph
@@ -30,4 +30,4 @@ Ububtu is a full-stack application using React for fronend and Flask for backend
 either Redux, useContext, password protection or bootrap 
 
 # TRELLO
-<img width="1263" alt="Screen Shot 2024-01-30 at 1 03 17 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/361406de-a387-4130-8e48-b5ae1c922d23">
+<img width="1258" alt="Screen Shot 2024-01-30 at 4 17 26 PM" src="https://github.com/DorahelyS/UBUNTU/assets/142290529/1dfd4b6c-78c6-4a78-bcc8-85b0dc341a21">
