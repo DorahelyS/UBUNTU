@@ -11,6 +11,7 @@ from config import app, db, api
 # Add your model imports
 from models import db, User, Emotion, UserEmotion, Like
 
+#from sqlalchemy import and_
 
 # Views go here!
 
@@ -34,13 +35,14 @@ def users():
         elif request.method == 'POST':
             try:
                 new_user_form = request.get_json()
-
+                #have to make sure when creating a new instance the keywords much match the class attributes 
+                #you need to use these exact attribute names as keyword arguments
                 new_user = User(
-                    new_user_name=new_user_form.get('name'),
-                    new_user_email=new_user_form.get('email'),
-                    new_user_password=new_user_form.get('password'),
-                    new_user_position=new_user_form.get('position'),
-                    new_user_age=new_user_form.get('age')
+                    name=new_user_form['name'],
+                    email=new_user_form['email'],
+                    password=new_user_form['password'],
+                    position=new_user_form['position'],
+                    age=new_user_form['age']
                 )
 
                 db.session.add(new_user)
@@ -50,10 +52,16 @@ def users():
                     new_user.to_dict(),
                     201
                 )
-
+            #except Exception as e:
+                #print(f"An error occurred: {str(e)}")
+                #response = make_response(
+                    #{'error': 'Cannot make new user'},
+                    #500
+                #)
+            
             except:
                 response = make_response(
-                    {'error': 'Cannot make new user'},
+                    {'error': 'Cannot make new compliment'},
                     500
                 )
 
@@ -102,8 +110,12 @@ def users_by_id(id):
 
         elif request.method == 'DELETE':
             try:
+                #assoc_assets = UserEmotion.query.filter(
+                    #and_(UserEmotion.user_id == id, Like.user_id == id)).all()
+                
                 assoc_assets = UserEmotion.query.filter(
-                    UserEmotion.user_id == id) | Like.query.filter(Like.user_id == id).all()
+                    UserEmotion.user_id == id).all() + Like.query.filter(Like.user_id == id).all()
+
 
                 for del_asset in assoc_assets:
                     db.session.delete(del_asset)
@@ -121,6 +133,13 @@ def users_by_id(id):
                     {'error': 'Cannot delete user'},
                     405
                 )
+
+            #to help debug
+            #except Exception as e:
+                #response = make_response(
+                    #{'error': f'Cannot delete user: {str(e)}'},
+                    #500
+                #)
 
             pass
     else:
@@ -148,7 +167,7 @@ def emotions():
                 new_emotion_form = request.get_json()
 
                 new_emotion = Emotion(
-                    new_emotion=new_emotion_form.get('emotion')
+                    emotion=new_emotion_form.get('emotion')
                 )
 
                 db.session.add(new_emotion)
@@ -211,7 +230,7 @@ def emotions_by_id(id):
         elif request.method == 'DELETE':
             try:
                 assoc_assets = UserEmotion.query.filter(
-                    UserEmotion.emotion_id == id) | Like.query.filter(Like.emotion_id == id).all()
+                    UserEmotion.emotion_id == id).all() + Like.query.filter(Like.emotion_id == id).all()
 
                 for del_asset in assoc_assets:
                     db.session.delete(del_asset)
@@ -257,8 +276,8 @@ def likes():
                 new_like_form = request.get_json()
 
                 new_like = Like(
-                    new_like_user_id=new_like_form.get('user_id'),
-                    new_like_emotion_id=new_like_form.get('emotion_id')
+                    user_id=new_like_form.get('user_id'),
+                    emotion_id=new_like_form.get('emotion_id')
                 )
 
                 db.session.add(new_like)
@@ -361,9 +380,9 @@ def user_emotion():
                 new_user_emotion_form = request.get_json()
 
                 new_user_emotion = UserEmotion(
-                    user_id=new_user_emotion_form.get('user_id'),
+                    user_id=new_user_emotion_form['user_id'],
                     emotion_id=new_user_emotion_form.get('emotion_id'),
-                    emotion_intensity=new_user_emotion_form('emotion_intensity')
+                    emotion_intensity=new_user_emotion_form.get('emotion_intensity')
                 )
 
                 db.session.add(new_user_emotion)
@@ -374,9 +393,16 @@ def user_emotion():
                     201
                 )
 
+            #except Exception as e:
+                #print(f"An error occurred: {str(e)}")
+                #response = make_response(
+                    #{'error': 'Cannot make new user'},
+                    #500
+                #)
+
             except:
                 response = make_response(
-                    {'error': 'Cannot make'},
+                    {'error': 'Cannot make new compliment'},
                     500
                 )
 
