@@ -1,7 +1,7 @@
 // lets me use react library
 import React from 'react';
 import LoginForm from "./LoginForm";
-import MainPageNav from "./MainPageNav"
+//import MainPageNav from "./MainPageNav"
 
 // declares a component - each component is a function 
 function MainPage() {
@@ -10,7 +10,6 @@ function MainPage() {
         <div>
             <div>
                 <LoginForm />
-                <MainPageNav />
             </div>
         </div>
     )

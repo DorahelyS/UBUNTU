@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,3 +26,4 @@ function MainPageNav() {
 }
 
 export default MainPageNav;
+*/

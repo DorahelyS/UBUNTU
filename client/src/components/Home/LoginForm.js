@@ -66,6 +66,7 @@ function LoginForm() {
                     <input
                         id="username"
                         name="username"
+                        typer="test"
                         placeholder="username"
                         onChange={formik.handleChange}
                         value={formik.values.username}
@@ -76,7 +77,7 @@ function LoginForm() {
                     <input
                         id="email"
                         name="email"
-                        type="eamil"
+                        type="email"
                         placeholder="email"
                         onChange={formik.handleChange}
                         value={formik.values.email}
