@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Formik, useFormik, ErrorMessage } from "formik";
 //yup is needed for schema => yup tells formik this is the structure & takes care of validations
 import * as yup from "yup";
+// remember . represents current directory - this location
+// remember .. representsthe parent directory - one level up
+import '../../styling/LoginForm.css'
 
 
 // declares a component - each component is a function - making a separate component for the login form
@@ -29,28 +32,38 @@ function LoginForm() {
 
     // now need to actully use it with the useFormik hook - and takes in a few things:
     // the intial values of the form, the validation schema to take into account and the onsubmit handler
+    // useFormik hook helps manage from stae and form submissions
     const formik = useFormik({
+        // setting up initial values so that when the login form loads it is empty
         initialValues: {
             username: '',
             email: ''
         },
-        // validation schema need to use here is the form schema from abaove
+        // validation schema need to use here is the form schema from above
         validationSchema: schema,
+        // here is where I start to define what happens when a form is submitted
         onSubmit: () => {
             // here is were post request is made but not posting a new user I want to get user
+            // I am sending request to the backend server /users url to fecth all the user data
             // console.log(values)
             fetch(`/users`)
+                // here is the response is successful it will convert the response (res) to JSON notation
                 .then((res) => {
                     if (res.ok) {
                         return res.json();
                     }
                     throw new Error("Invalid credentials");
                 })
+                // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
+                // the next frontend route which is /UserProfile
                 .then((data) => {
+                    // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
+                    // the currentUser data is available 
                     navigate(`/UserProfile`, {
                         state: { currentUser: data },
                     });
                 })
+                //if any errors - errors will be longed to the console
                 .catch((error) => {
                     console.log(error.message);
                 });
@@ -60,7 +73,7 @@ function LoginForm() {
 
     // now that schema/validations/hook is in place need to put everything inside jsx
     return (
-        <div className="login">
+        <div className="login-container">
             <form onSubmit={formik.handleSubmit}>
                 <div className="input-group">
                     <input

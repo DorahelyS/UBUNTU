@@ -22,12 +22,16 @@ if __name__ == '__main__':
         Emotion.query.delete()
         UserEmotion.query.delete()
         Like.query.delete()
+
+        db.session.commit()
+
+        
         print("Starting seed...")
 
         print("Creating users...")
-        user_1 = User(name="Dorahely", email='dorahely@gmail.com', password='passwords', position='engineer1', age=27)
-        user_2 = User(name="Monica", email='monica@gmail.com', password='passwords', position='engineer2', age=27)
-        user_3 = User(name="Kylie", email='kylie@gmail.com', password='passwords', position='engineer3', age=27)
+        user_1 = User(name="Dorahely", username='DorahelyS', email='dorahely@gmail.com', position='engineer1', age=27)
+        user_2 = User(name="Monica", username='MonicaJ', email='monica@gmail.com', position='engineer2', age=27)
+        user_3 = User(name="Kylie", username='KylieJ', email='kylie@gmail.com', position='engineer3', age=27)
 
         db.session.add_all([user_1, user_2, user_3])
         db.session.commit()
@@ -59,3 +63,4 @@ if __name__ == '__main__':
         db.session.commit()
         
         print("Seeding complete...")
+        

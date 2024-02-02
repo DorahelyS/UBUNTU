@@ -13,8 +13,9 @@ class User(db.Model, SerializerMixin):
     # creating columns 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    username = db.Column(db.String)
     email = db.Column(db.String)
-    password = db.Column(db.String)
+    #password = db.Column(db.String)
     position = db.Column(db.String)
     age = db.Column(db.Integer)
 
