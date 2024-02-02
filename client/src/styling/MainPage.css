@@ -1,0 +1,23 @@
+.main {
+    /* Set the background image */
+    background-image: url('../../public/FE37102A-C266-413F-B2EF-A0F7B216B0F4.JPG');
+
+    /* Adjust background properties as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+
+}
+
+.mouse-effect {
+    position: absolute;
+    font-size: 10px;
+    pointer-events: none;
+}
+
+
+
+
+
+
