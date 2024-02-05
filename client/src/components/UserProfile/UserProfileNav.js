@@ -1,27 +1,39 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function MainPageNav() {
+const UserProfileNav = ({ currentUser }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    
 
-    const navigateToHome = () => {
-        navigate('/');
-    };
+    // Log the currentUser to ensure it's being passed correctly
+    console.log("Current User:", currentUser);
 
-    const navigateToUserProfile = () => {
-        navigate('/UserProfile');
-    };
+    //for debugging to check path location 
+    console.log("Current path:", location.pathname)
 
+    // Log the result of the condition for rendering the Home button
+    console.log("Render Home Button:", currentUser ? false : location.pathname !== '/User-Profile');
 
     return (
-        <nav className='navbar'>
-            <ul>
-                <li><h1>U</h1></li>
-                <li><button onClick={navigateToHome}>Home</button></li>
-                <li><button onClick={navigateToUserProfile}>User Page</button></li>
-            </ul>
-        </nav>
+        <div className="navbar">
+            <span className="logo">U</span>
+            <div className="user">
+                {currentUser ? (
+                    <>
+                        <span>{currentUser.username}</span>
+                        <button onClick={() => navigate('/')}>Logout</button>
+                    </>
+                ) : (
+                    <button onClick={() => {
+                        if (location.pathname !== '/User-Profile') {
+                            navigate('/User-Profile');
+                        }
+                    }}>Home</button>
+                )}
+            </div>
+        </div>
     );
-}
+};
 
-export default MainPageNav;
+export default UserProfileNav;

@@ -1,6 +1,6 @@
 // lets me use react library
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Formik, useFormik, ErrorMessage } from "formik";
 //yup is needed for schema => yup tells formik this is the structure & takes care of validations
 import * as yup from "yup";
@@ -12,6 +12,15 @@ import '../../styling/LoginForm.css'
 // declares a component - each component is a function - making a separate component for the login form
 function LoginForm() {
     const navigate = useNavigate()
+
+    const location = useLocation();
+
+    //for debugging to check path location 
+    useEffect(() => {
+        console.log('Current pathname:', location.pathname);
+    }, [location]);
+
+
 
     // it is going to be an object and that shape of that object will have a bunch of stuff like title or username etc
     // form schema the structure of the JSON that is going to be sent with user's post request save here
@@ -59,7 +68,7 @@ function LoginForm() {
                 .then((data) => {
                     // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
                     // the currentUser data is available 
-                    navigate(`/UserProfile`, {
+                    navigate(`/User-Profile`, {
                         state: { currentUser: data },
                     });
                 })

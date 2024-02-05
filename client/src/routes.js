@@ -1,6 +1,7 @@
 import App from "./App"
-import MainPage from "./components/Home/MainPage"
+import MainPage from "./components/MainPage/MainPage"
 import UserProfilePage from "./components/UserProfile/UserProfilePage"
+import CreateNewEmotion from "./components/CreateNewEmotion/CreateNewEmotion";
 
 
 
@@ -10,7 +11,8 @@ const routes = [
         element: <App />,
         children: [
             { path: "/", element: <MainPage /> },
-            { path: "/UserProfile", element: <UserProfilePage /> },
+            { path: "/User-Profile", element: <UserProfilePage /> },
+            { path: "/New-Emotion", element: <CreateNewEmotion /> }
         ],
     },
 ];
