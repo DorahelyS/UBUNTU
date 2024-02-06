@@ -10,9 +10,7 @@ function App() {
   //returns what I want to see on the page - in this case the login form
   return (
     <div className="App">
-      <div>
-        <Outlet />
-      </div>
+      <Outlet /> {/* This will render the child routes */}
     </div>
   );
 }
