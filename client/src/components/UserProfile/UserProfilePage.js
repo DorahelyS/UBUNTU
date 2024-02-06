@@ -1,7 +1,7 @@
 // lets me use react library
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import UserProfileNav from "./UserProfileNav"
+//import UserProfileNav from "./UserProfileNav"
 import CreateNewEmotion from '../CreateNewEmotion/CreateNewEmotion';
 
 function UserProfilePage() {
@@ -26,7 +26,6 @@ function UserProfilePage() {
 
     return (
         <div>
-            <UserProfileNav currentUser={currentUser} />
             <div style={{ textAlign: 'center', fontWeight: 'bold', marginTop: '20px' }}>{greetingMessage}</div>
             <button onClick={handleCreateNewEmotion}>Log New Emotion</button>
             <CreateNewEmotion currentUser={currentUser} state={state} />
