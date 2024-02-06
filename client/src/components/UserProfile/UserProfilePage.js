@@ -7,6 +7,7 @@ import CreateNewEmotion from '../CreateNewEmotion/CreateNewEmotion';
 function UserProfilePage() {
     const navigate = useNavigate();
     const { state } = useLocation();
+    console.log("current state:", state)
     const { currentUser } = state;
 
     const handleCreateNewEmotion = () => {

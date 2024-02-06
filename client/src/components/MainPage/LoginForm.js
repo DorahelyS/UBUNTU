@@ -51,33 +51,35 @@ function LoginForm() {
         // validation schema need to use here is the form schema from above
         validationSchema: schema,
         // here is where I start to define what happens when a form is submitted
-        onSubmit: () => {
-            // here is were post request is made but not posting a new user I want to get user
-            // I am sending request to the backend server /users url to fecth all the user data
-            // console.log(values)
-            fetch(`/users`)
-                // here is the response is successful it will convert the response (res) to JSON notation
+
+        onSubmit: (values) => {
+            fetch("/login", {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(values)
+            })
                 .then((res) => {
                     if (res.ok) {
                         return res.json();
                     }
                     throw new Error("Invalid credentials");
                 })
-                // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
-                // the next frontend route which is /UserProfile
                 .then((data) => {
-                    // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
-                    // the currentUser data is available 
+                    // Extract user data from the response
+                    const currentUser = data;
+
+                    // Navigate to the UserProfile page with the user data
                     navigate(`/User-Profile`, {
-                        state: { currentUser: data },
+                        state: { currentUser }
                     });
                 })
-                //if any errors - errors will be longed to the console
                 .catch((error) => {
                     console.log(error.message);
                 });
-        },
+        }
     });
+
+
 
 
     // now that schema/validations/hook is in place need to put everything inside jsx
@@ -118,3 +120,98 @@ function LoginForm() {
 export default LoginForm;
 
 // need to also import LoginForm  to Login.js
+
+
+/*
+        onSubmit: (values) => {
+                // here is were post request is made but not posting a new user I want to get user
+                // I am sending request to the backend server /users url to fecth all the user data
+                // console.log(values)
+                fetch(`/login`)
+                    // here is the response is successful it will convert the response (res) to JSON notation
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.json();
+                        }
+                        throw new Error("Invalid credentials");
+                    })
+                    // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
+                    // the next frontend route which is /UserProfile
+                    .then((data) => {
+                        // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
+                        // the currentUser data is available 
+                        navigate(`/User-Profile`, {
+                            state: { currentUser: data },
+                        });
+                    })
+                    //if any errors - errors will be longed to the console
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+            },
+*/
+
+
+/*
+ fetch("/login", {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(values)
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    throw new Error("Invalid credentials");
+                })
+                // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
+                // the next frontend route which is /UserProfile
+                .then((data) => {
+                    // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
+                    // the currentUser data is available 
+                    navigate(`/User-Profile`, {
+                        state: { currentUser: data },
+                    });
+                })
+                //if any errors - errors will be longed to the console
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        },
+*/
+
+/*
+ onSubmit: () => {
+            // here is were post request is made but not posting a new user I want to get user
+            // I am sending request to the backend server /users url to fecth all the user data
+            // console.log(values)
+            fetch("/users")
+                // here is the response is successful it will convert the response (res) to JSON notation
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    throw new Error("Invalid credentials");
+                })
+                // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
+                // the next frontend route which is /UserProfile
+                .then((data) => {
+                    data.forEach((currentUser) => {
+                        if (
+                            currentUser.username === formik.values.username && currentUser.email === formik.values.email){
+                    // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
+                    // the currentUser data is available 
+                        navigate(`/User-Profile`, {
+                            state: { currentUser: data },
+                        });
+                    }
+                })
+            })
+
+                //if any errors - errors will be longed to the console
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        },
+    });
+*/

@@ -2,8 +2,9 @@
 
 # Standard library imports
 
+import json 
 # Remote library imports
-from flask import request, make_response
+from flask import request, make_response, jsonify
 from flask_restful import Resource
 
 # Local imports
@@ -18,6 +19,30 @@ from models import db, User, Emotion, UserEmotion, Like
 @app.route('/')
 def index():
     return '<h1>Project Server</h1>'
+
+@app.route("/login", methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+
+    # Perform authentication logic based on username and email
+    user = User.query.filter_by(username=username, email=email).first()
+
+    if user:
+        # Return only the data of the authenticated user
+        return jsonify({
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+            'name': user.name,
+            'position': user.position,
+            'age': user.age,
+            'message': 'Login successful'
+        }), 200
+    else:
+        return jsonify({'error': 'Invalid username or email'}), 401
+
 
 @app.route("/users", methods=['GET', 'POST'])
 def users():

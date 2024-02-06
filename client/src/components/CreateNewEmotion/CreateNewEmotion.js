@@ -1,6 +1,7 @@
 // lets me use react library
 import React from 'react';
-import UserProfileNav from '../../UserProfile/UserProfileNav';
+import UserProfileNav from '../UserProfile/UserProfileNav';
+
 
 function CreateNewEmotion({ currentUser }) {
     return (
