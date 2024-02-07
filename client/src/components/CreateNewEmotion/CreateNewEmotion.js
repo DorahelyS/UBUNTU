@@ -24,6 +24,8 @@ function CreateNewEmotion() {
     const [emotionIntensity, setEmotionIntensity] = useState('');
 
     const [submissionMessage, setSubmissionMessage] = useState(null);
+    const [emotionId, setEmotionId] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
@@ -174,6 +176,11 @@ function CreateNewEmotion() {
             const emotionData = await emotionResponse.json();
             const emotionId = emotionData.id;
 
+            console.log('Emotion created successfully. Emotion ID:', emotionId); // Log the emotion ID
+
+            // storing id for later use - for delete
+            setEmotionId(emotionId)
+
             // Step 2: Create User Emotion using obtained emotionId
             const userEmotionData = {
                 user_id: currentUser.id,
@@ -205,6 +212,30 @@ function CreateNewEmotion() {
             // Handle success or navigate to another page
         } catch (error) {
             console.error('Error:', error.message);
+        }
+    };
+
+    const handleDelete = async () => {
+        if (!emotionId) {
+            console.error('Emotion ID is null');
+            return;
+        }
+    
+        try {
+            const response = await fetch(`/emotions/${emotionId}`, {
+                method: 'DELETE'
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to delete the emotion');
+            }
+    
+            console.log('Emotion deleted successfully');
+            // You may want to reset emotionId state after successful deletion
+            setEmotionId(null);
+        } catch (error) {
+            console.error('Error:', error.message);
+            setErrorMessage('Failed to delete the emotion');
         }
     };
 
@@ -331,7 +362,10 @@ function CreateNewEmotion() {
 
             {/* Display submission message if available */}
             {submissionMessage ? (
-                <p>{submissionMessage}</p>
+                <div>
+                    <p>{submissionMessage}</p>
+                    <button onClick={handleDelete}>Delete</button>
+                </div>
             ) : (
                 <button onClick={handlePostSubmit}>Submit</button>
             )}
