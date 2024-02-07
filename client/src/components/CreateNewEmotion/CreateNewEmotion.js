@@ -8,216 +8,29 @@ import { useLocation, useNavigate } from 'react-router-dom';
 // Refers to the location state provided by React Router, used for passing data between different components as users navigate through the application.
 // I don't need to explicitly use useNavigate unless you have specific navigation requirements within this component.
 function CreateNewEmotion() {
+    // locations and navigations
     const location = useLocation(); // Define location using useLocation hook
     const navigate = useNavigate();
-
     const { state } = location;
     //const { currentUser } = state;
     const currentUser = state ? state.currentUser : null;
 
-    const [emotionIntensity, setEmotionIntensity] = useState('');
+
+    // states
+    const [primaryEmotion, setPrimaryEmotion] = useState('');
     const [secondEmotion, setSecondEmotion] = useState('');
+    const [finalEmotion, setFinalEmotion] = useState('');
     const [secondOption, setSecondOption] = useState([]);
-    //const [emotionId, setEmotionId] = useState(''); // Define emotionId state
-    //const [firstEmotion, setFirstEmotion] = useState('');
-    //const [thirdEmotion, setThirdEmotion] = useState('');
+    const [emotionIntensity, setEmotionIntensity] = useState('');
 
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
-    /*
-        // Function to handle form submission
-        const handleEmotion = (e) => {
-            const selectedPrimaryEmotion = e.target.value;
-            let emotionId;
-            if (selectedPrimaryEmotion === "Anger") {
-                emotionId = 1; // Assuming 1 is the ID of the "Happy" emotion in your database
-            } else if (selectedPrimaryEmotion === "Sadness") {
-                emotionId = 2; // Assuming 2 is the ID of the "Sad" emotion in your database
-            } else if (selectedPrimaryEmotion === "Suprise") {
-                emotionId = 3; // Assuming 3 is the ID of the "Anger" emotion in your database
-            } else if (selectedPrimaryEmotion === "Joy") {
-                emotionId = 4; // Assuming 3 is the ID of the "Anger" emotion in your database
-            } else if (selectedPrimaryEmotion === "Love") {
-                emotionId = 5; // Assuming 3 is the ID of the "Anger" emotion in your database
-            } else if(selectedPrimaryEmotion === "Fear") {
-                emotionId = 6;
-            }
-            setSecondEmotion(emotionId);
-            // Set secondary emotion options based on the primary emotion selected
-    
-            if (
-                [
-                    "Hate",
-                    "Hostile",
-                    "Agitated",
-                    "Frustrated",
-                    "Annoyed",
-                    "Resentful",
-                    "Jealous",
-                    "Contempt",
-                    "Revolted"
-                ].includes(selectedPrimaryEmotion)
-            ) {
-                setSecondOption(["Rage", "Exasperated", "Irritable", "Envy", "Disgust"])
-                setSecondEmotion('Anger')
-            } else if (
-                [
-                    "Agony",
-                    "Hurt",
-                    "Depressed",
-                    "Sorrow",
-                    "Dismayed",
-                    "Displeased",
-                    "Regretful",
-                    "Guilty",
-                    "Isolated",
-                    "Lonely",
-                    "Grief",
-                    "Powerless"
-                ].includes(selectedPrimaryEmotion)
-            ) {
-                setSecondOption(["Suffering", "Sadness", "Disappointed", "Shameful", "Neglected", "Despair"])
-                setSecondEmotion('Sadness')
-            } else if (
-                [
-                    "Shocked",
-                    "Dismayed",
-                    "Disillusioned",
-                    "Perplexed",
-                    "Astonished",
-                    "Awe-struck",
-                    "Speechless",
-                    "Astounded",
-                    "Stimulted",
-                    "Touched"
-                ].includes(selectedPrimaryEmotion)
-            ) {
-                setSecondOption(["Stunned", "Confused", "Amazed", "Overcome", "Moved"])
-                setSecondEmotion('Surprise')
-            } else if (
-                [
-                    "Pleased",
-                    "Satisfied",
-                    "Amused",
-                    "Delighted",
-                    "Jovial",
-                    "Blissful",
-                    "Triumphant",
-                    "Illustrious",
-                    "Eager",
-                    "Hopeful",
-                    "Excited",
-                    "Zeal",
-                    "Euphoric",
-                    "Jubilation",
-                    "Enchanted",
-                    "Rapture"
-                ].includes(selectedPrimaryEmotion)
-            ) {
-                setSecondOption(["Content", "Happy", "Cheerful", "Proud", "Optimistic", "Enthusiatic", "Elation", "Enthralled"])
-                setSecondEmotion('Joy')
-            } else if (
-                [
-                    "Romantic",
-                    "Fondness",
-                    "Sentimental",
-                    "Attracted",
-                    "Passion",
-                    "Infatuation",
-                    "Caring",
-                    "Compassionate",
-                    "Relieved",
-                    "Satisfied"
-                ].includes(selectedPrimaryEmotion)
-            ) {
-                setSecondOption(["Affectionate", "Longing", "Desire", "Tenderness", "Peaceful"])
-                setSecondEmotion('Love')
-            } else if (
-                [
-                    "Frightened",
-                    "Helpless",
-                    "Panic",
-                    "Hysertical",
-                    "Inferior",
-                    "Inadequate",
-                    "Worried",
-                    "Anxious",
-                    "Mortified",
-                    "Dread"
-                ].includes(selectedPrimaryEmotion)
-            ) {
-                setSecondOption(["Scared", "Terror", "Insecure", "Nervous", "Horror"])
-                setSecondEmotion('Fear')
-            }
-        };
-    
 
-    const handleEmotion = (e) => {
+    // first emotion 
+    const handleFirstEmotion = (e) => {
         const selectedPrimaryEmotion = e.target.value;
-
-        // Set secondary emotion options based on the primary emotion selected
-        if (selectedPrimaryEmotion === "Happy") {
-            setSecondOption(["Content", "Happy", "Cheerful", "Proud", "Optimistic", "Enthusiatic", "Elation", "Enthralled"]);
-        } else if (selectedPrimaryEmotion === "Sad") {
-            setSecondOption(["Suffering", "Sadness", "Disappointed", "Shameful", "Neglected", "Despair"]);
-        } else if (selectedPrimaryEmotion === "Anger") {
-            setSecondOption(["Rage", "Exasperated", "Irritable", "Envy", "Disgust"]);
-        } else if (selectedPrimaryEmotion === "Surprise") {
-            setSecondOption(["Stunned", "Confused", "Amazed", "Overcome", "Moved"]);
-        } else if (selectedPrimaryEmotion === "Joy") {
-            setSecondOption(["Content", "Happy", "Cheerful", "Proud", "Optimistic", "Enthusiatic", "Elation", "Enthralled"]);
-        } else if (selectedPrimaryEmotion === "Love") {
-            setSecondOption(["Affectionate", "Longing", "Desire", "Tenderness", "Peaceful"]);
-        } else if (selectedPrimaryEmotion === "Fear") {
-            setSecondOption(["Scared", "Terror", "Insecure", "Nervous", "Horror"]);
-        } else {
-            // Handle the case when no emotion is selected
-            setSecondOption([]);
-        }
-    };
-
-    const handleSubmit = async () => {
-        try {
-            const data = {
-                user_id: currentUser.id,
-                emotion_id: secondEmotion,
-                emotion_intensity: emotionIntensity
-            };
-
-            // Make a POST request to your backend with the selected emotions
-            const response = await fetch('user_emotion', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to log emotion');
-            }
-
-            // Handle success or navigate to another page
-        } catch (error) {
-            // Handle error
-            console.error('Error:', error.message);
-        }
-    };
-
-    const handleNavigateToUserProfile = () => {
-        navigate('/User-Profile', {
-            state: { currentUser }
-        });
-    };
-
-    const handleNavigateToLogin = () => {
-        navigate('/', {
-            state: { currentUser }
-        });
-    };
-*/
-    const handleEmotion = (e) => {
-        const selectedPrimaryEmotion = e.target.value;
+        setPrimaryEmotion(selectedPrimaryEmotion);
+        console.log('Selected Primary Emotion:', selectedPrimaryEmotion);
 
         if (
             [
@@ -249,18 +62,17 @@ function CreateNewEmotion() {
                 "Powerless"
             ].includes(selectedPrimaryEmotion)
         ) {
-            setSecondOption(["Suffering", "Sadness", "Disappointed", "Shameful", "Neglected", "Despair"]);
+            setSecondOption(["Suffering", "Disappointed", "Shameful", "Neglected", "Despair"]);
         } else if (
             [
                 "Shocked",
-                "Dismayed",
                 "Disillusioned",
                 "Perplexed",
                 "Astonished",
                 "Awe-struck",
                 "Speechless",
                 "Astounded",
-                "Stimulted",
+                "Stimulated",
                 "Touched"
             ].includes(selectedPrimaryEmotion)
         ) {
@@ -285,7 +97,7 @@ function CreateNewEmotion() {
                 "Rapture"
             ].includes(selectedPrimaryEmotion)
         ) {
-            setSecondOption(["Content", "Happy", "Cheerful", "Proud", "Optimistic", "Enthusiatic", "Elation", "Enthralled"]);
+            setSecondOption(["Content", "Happy", "Cheerful", "Proud", "Optimistic", "Enthusiastic", "Elation", "Enthralled"]);
         } else if (
             [
                 "Romantic",
@@ -297,7 +109,6 @@ function CreateNewEmotion() {
                 "Caring",
                 "Compassionate",
                 "Relieved",
-                "Satisfied"
             ].includes(selectedPrimaryEmotion)
         ) {
             setSecondOption(["Affectionate", "Longing", "Desire", "Tenderness", "Peaceful"]);
@@ -306,7 +117,7 @@ function CreateNewEmotion() {
                 "Frightened",
                 "Helpless",
                 "Panic",
-                "Hysertical",
+                "Hysterical",
                 "Inferior",
                 "Inadequate",
                 "Worried",
@@ -318,28 +129,74 @@ function CreateNewEmotion() {
             setSecondOption(["Scared", "Terror", "Insecure", "Nervous", "Horror"]);
         } else {
             setSecondOption([]);
+            console.log('Updated Second Option:', secondOption);
         }
     };
 
+    // second emotion
+    const handleSecondEmotion = (e) => {
+        const selectedSecondEmotion = e.target.value;
+
+        // Setting the final emotion based on the selected second emotion
+        if (["Rage", "Exasperated", "Irritable", "Envy", "Disgust"].includes(selectedSecondEmotion)) {
+            setFinalEmotion("Anger");
+        } else if (["Suffering", "Disappointed", "Shameful", "Neglected", "Despair"].includes(selectedSecondEmotion)) {
+            setFinalEmotion("Sadness");
+        } else if (["Stunned", "Confused", "Amazed", "Overcome", "Moved"].includes(selectedSecondEmotion)) {
+            setFinalEmotion("Surprise");
+        } else if (["Content", "Happy", "Cheerful", "Proud", "Optimistic", "Enthusiastic", "Elation", "Enthralled"].includes(selectedSecondEmotion)) {
+            setFinalEmotion("Joy");
+        } else if (["Affectionate", "Longing", "Desire", "Tenderness", "Peaceful"].includes(selectedSecondEmotion)) {
+            setFinalEmotion("Love");
+        } else if (["Scared", "Terror", "Insecure", "Nervous", "Horror"].includes(selectedSecondEmotion)) {
+            setFinalEmotion("Fear");
+        }
+    };
+
+    // form submission
     const handleSubmit = async () => {
         try {
-            const data = {
-                user_id: currentUser.id,
-                emotion_id: secondEmotion,
-                emotion_intensity: emotionIntensity
-            };
-
-            const response = await fetch('user_emotion', {
+            // Step 1: Create Emotion
+            const emotionResponse = await fetch('/emotions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ emotion: finalEmotion })
             });
 
-            if (!response.ok) {
+            if (!emotionResponse.ok) {
+                throw new Error('Failed to create emotion');
+            }
+
+            const emotionData = await emotionResponse.json();
+            const emotionId = emotionData.id;
+
+            // Step 2: Create User Emotion using obtained emotionId
+            const userEmotionData = {
+                user_id: currentUser.id,
+                emotion_id: emotionId,
+                emotion_intensity: emotionIntensity
+            };
+
+            const userEmotionResponse = await fetch('/user_emotion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userEmotionData)
+            });
+
+            if (!userEmotionResponse.ok) {
                 throw new Error('Failed to log emotion');
             }
+
+            // Log successful submission to the console
+            console.log('Emotion submitted successfully:', {
+                currentUser: currentUser,
+                selectedEmotion: finalEmotion,
+                emotionIntensity: emotionIntensity
+            });
 
             // Handle success or navigate to another page
         } catch (error) {
@@ -347,12 +204,14 @@ function CreateNewEmotion() {
         }
     };
 
+    // navigating to back to User-Profile
     const handleNavigateToUserProfile = () => {
         navigate('/User-Profile', {
             state: { currentUser }
         });
     };
 
+    // navigating back to log in
     const handleNavigateToLogin = () => {
         navigate('/', {
             state: { currentUser }
@@ -363,8 +222,9 @@ function CreateNewEmotion() {
     return (
         <div>
             <div>
+                {/* Primary emotion */}
                 <label>Select Primary Emotion:</label>
-                <select onChange={handleEmotion}>
+                <select onChange={(e) => { setPrimaryEmotion(e.target.value); setSecondEmotion(''); handleFirstEmotion(e); }}>
                     <option value="">Select</option>
                     <option value="Hate">Hate</option>
                     <option value="Hostile">Hostile</option>
@@ -433,33 +293,40 @@ function CreateNewEmotion() {
                     <option value="Dread">Dread</option>
                 </select>
             </div>
+            {/* Logging secondOption and its length  to make sure it it filtering correctly*/}
+            {console.log("Second Options:", secondOption)}
+            {console.log("Second Options Length:", secondOption.length)}
+
 
             {secondOption.length > 0 && (
                 <div>
+                    {/* second emotion */}
                     <label>Select Secondary Emotion:</label>
-                    <select onChange={(e) => setSecondEmotion(e.target.value)}>
+                    <select onChange={(e) => { setSecondEmotion(e.target.value); handleSecondEmotion(e); }}>
                         <option value="">Select</option>
-                        {secondOption.map((option, index) => (
-                            <option key={index} value={option}>{option}</option>
+                        {secondOption.map((option) => (
+                            <option key={option} value={option}>{option}</option>
                         ))}
                     </select>
                 </div>
             )}
 
-            {/* Displayed final selected emotion */}
-            {secondEmotion && (
+            {/* Display for final selected emotion */}
+            {finalEmotion && (
                 <div>
                     <label>Final Selected Emotion:</label>
-                    <p>{secondEmotion}</p>
+                    <p>{finalEmotion}</p>
                 </div>
             )}
 
-            {/* Included input for emotion intensity */}
+            {/* included input for emotion intensity */}
             <div>
                 <label>Emotion Intensity:</label>
                 <input type="text" value={emotionIntensity} onChange={(e) => setEmotionIntensity(e.target.value)} />
             </div>
 
+
+            {/* Buttons for form submission and navigation */}
             <button onClick={handleSubmit}>Submit</button>
             <button onClick={handleNavigateToUserProfile}>Home</button>
             <button onClick={handleNavigateToLogin}>Logout</button>
