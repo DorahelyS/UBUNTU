@@ -23,6 +23,8 @@ function CreateNewEmotion() {
     const [secondOption, setSecondOption] = useState([]);
     const [emotionIntensity, setEmotionIntensity] = useState('');
 
+    const [submissionMessage, setSubmissionMessage] = useState(null);
+
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
 
@@ -154,7 +156,7 @@ function CreateNewEmotion() {
     };
 
     // form submission
-    const handleSubmit = async () => {
+    const handlePostSubmit = async () => {
         try {
             // Step 1: Create Emotion
             const emotionResponse = await fetch('/emotions', {
@@ -197,6 +199,8 @@ function CreateNewEmotion() {
                 selectedEmotion: finalEmotion,
                 emotionIntensity: emotionIntensity
             });
+
+            setSubmissionMessage(`Your emotion ${finalEmotion} with intensity ${emotionIntensity} was submitted successfully.`)
 
             // Handle success or navigate to another page
         } catch (error) {
@@ -325,9 +329,15 @@ function CreateNewEmotion() {
                 <input type="text" value={emotionIntensity} onChange={(e) => setEmotionIntensity(e.target.value)} />
             </div>
 
+            {/* Display submission message if available */}
+            {submissionMessage ? (
+                <p>{submissionMessage}</p>
+            ) : (
+                <button onClick={handlePostSubmit}>Submit</button>
+            )}
+
 
             {/* Buttons for form submission and navigation */}
-            <button onClick={handleSubmit}>Submit</button>
             <button onClick={handleNavigateToUserProfile}>Home</button>
             <button onClick={handleNavigateToLogin}>Logout</button>
         </div>
