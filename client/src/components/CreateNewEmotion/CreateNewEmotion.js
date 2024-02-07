@@ -150,7 +150,7 @@ function CreateNewEmotion() {
                 setSecondEmotion('Fear')
             }
         };
-    */
+    
 
     const handleEmotion = (e) => {
         const selectedPrimaryEmotion = e.target.value;
@@ -200,6 +200,149 @@ function CreateNewEmotion() {
             // Handle success or navigate to another page
         } catch (error) {
             // Handle error
+            console.error('Error:', error.message);
+        }
+    };
+
+    const handleNavigateToUserProfile = () => {
+        navigate('/User-Profile', {
+            state: { currentUser }
+        });
+    };
+
+    const handleNavigateToLogin = () => {
+        navigate('/', {
+            state: { currentUser }
+        });
+    };
+*/
+    const handleEmotion = (e) => {
+        const selectedPrimaryEmotion = e.target.value;
+
+        if (
+            [
+                "Hate",
+                "Hostile",
+                "Agitated",
+                "Frustrated",
+                "Annoyed",
+                "Resentful",
+                "Jealous",
+                "Contempt",
+                "Revolted"
+            ].includes(selectedPrimaryEmotion)
+        ) {
+            setSecondOption(["Rage", "Exasperated", "Irritable", "Envy", "Disgust"]);
+        } else if (
+            [
+                "Agony",
+                "Hurt",
+                "Depressed",
+                "Sorrow",
+                "Dismayed",
+                "Displeased",
+                "Regretful",
+                "Guilty",
+                "Isolated",
+                "Lonely",
+                "Grief",
+                "Powerless"
+            ].includes(selectedPrimaryEmotion)
+        ) {
+            setSecondOption(["Suffering", "Sadness", "Disappointed", "Shameful", "Neglected", "Despair"]);
+        } else if (
+            [
+                "Shocked",
+                "Dismayed",
+                "Disillusioned",
+                "Perplexed",
+                "Astonished",
+                "Awe-struck",
+                "Speechless",
+                "Astounded",
+                "Stimulted",
+                "Touched"
+            ].includes(selectedPrimaryEmotion)
+        ) {
+            setSecondOption(["Stunned", "Confused", "Amazed", "Overcome", "Moved"]);
+        } else if (
+            [
+                "Pleased",
+                "Satisfied",
+                "Amused",
+                "Delighted",
+                "Jovial",
+                "Blissful",
+                "Triumphant",
+                "Illustrious",
+                "Eager",
+                "Hopeful",
+                "Excited",
+                "Zeal",
+                "Euphoric",
+                "Jubilation",
+                "Enchanted",
+                "Rapture"
+            ].includes(selectedPrimaryEmotion)
+        ) {
+            setSecondOption(["Content", "Happy", "Cheerful", "Proud", "Optimistic", "Enthusiatic", "Elation", "Enthralled"]);
+        } else if (
+            [
+                "Romantic",
+                "Fondness",
+                "Sentimental",
+                "Attracted",
+                "Passion",
+                "Infatuation",
+                "Caring",
+                "Compassionate",
+                "Relieved",
+                "Satisfied"
+            ].includes(selectedPrimaryEmotion)
+        ) {
+            setSecondOption(["Affectionate", "Longing", "Desire", "Tenderness", "Peaceful"]);
+        } else if (
+            [
+                "Frightened",
+                "Helpless",
+                "Panic",
+                "Hysertical",
+                "Inferior",
+                "Inadequate",
+                "Worried",
+                "Anxious",
+                "Mortified",
+                "Dread"
+            ].includes(selectedPrimaryEmotion)
+        ) {
+            setSecondOption(["Scared", "Terror", "Insecure", "Nervous", "Horror"]);
+        } else {
+            setSecondOption([]);
+        }
+    };
+
+    const handleSubmit = async () => {
+        try {
+            const data = {
+                user_id: currentUser.id,
+                emotion_id: secondEmotion,
+                emotion_intensity: emotionIntensity
+            };
+
+            const response = await fetch('user_emotion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to log emotion');
+            }
+
+            // Handle success or navigate to another page
+        } catch (error) {
             console.error('Error:', error.message);
         }
     };
