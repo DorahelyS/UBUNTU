@@ -224,7 +224,7 @@ function CreateNewEmotion() {
         }
 
         try {
-            const response = await fetch(`/emotions/${emotionId}`, {
+            const response = await fetch(`/user_emotion/${emotionId}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
@@ -238,12 +238,11 @@ function CreateNewEmotion() {
             }
             console.log('Emotion intensity updated successfully', emotionId);
 
-            setEmotionId(null);
             setPatchMessage('Updated successfully')
 
         } catch (error) {
             console.error('Error:', error.message);
-            setErrorMessage('Failed to delete the emotion');
+            setErrorMessage('Failed to update intensity');
         }
     }
 
@@ -397,7 +396,7 @@ function CreateNewEmotion() {
             {submissionMessage ? (
                 <div>
                     <p>{submissionMessage}</p>
-                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={handleDelete}>Delete Entire Emotion Log</button>
                     <button onClick={handlePatch}>Update Emotion Intensity</button>
                 </div>
             ) : (
