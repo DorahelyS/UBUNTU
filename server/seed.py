@@ -37,12 +37,14 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("Creating emotions...")
-        emotion_1 = Emotion(emotion='anxious')
-        emotion_2 = Emotion(emotion='stressed')
-        emotion_3 = Emotion(emotion='happy')
-        emotion_4 = Emotion(emotion='happy')
+        emotion_1 = Emotion(emotion='Anger')
+        emotion_2 = Emotion(emotion='Sadness')
+        emotion_3 = Emotion(emotion='Suprise')
+        emotion_4 = Emotion(emotion='Joy')
+        emotion_5 = Emotion(emotion='Love')
+        emotion_6 = Emotion(emotion='Fear')
 
-        db.session.add_all([emotion_1, emotion_2, emotion_3, emotion_4])
+        db.session.add_all([emotion_1, emotion_2, emotion_3, emotion_4, emotion_5, emotion_6])
         db.session.commit()
 
         print("Creating join table...")
@@ -50,8 +52,10 @@ if __name__ == '__main__':
         user_emotion_2 = UserEmotion(user_id=2, emotion_id=2, emotion_intensity=3)
         user_emotion_3 = UserEmotion(user_id=3, emotion_id=3, emotion_intensity=3)
         user_emotion_4 = UserEmotion(user_id=1, emotion_id=4, emotion_intensity=4)
+        user_emotion_5= UserEmotion(user_id=1, emotion_id=5, emotion_intensity=1)
+        user_emotion_6 = UserEmotion(user_id=1, emotion_id=6, emotion_intensity=3)
 
-        db.session.add_all([user_emotion_1, user_emotion_2, user_emotion_3, user_emotion_4])
+        db.session.add_all([user_emotion_1, user_emotion_2, user_emotion_3, user_emotion_4, user_emotion_5, user_emotion_6])
         db.session.commit()
 
         print("Creating like table...")

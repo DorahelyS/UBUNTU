@@ -28,6 +28,7 @@ function CreateNewEmotion() {
     const [errorMessage, setErrorMessage] = useState('');
     const [patchMessage, setPatchMessage] = useState(null);
 
+
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
 
@@ -141,6 +142,7 @@ function CreateNewEmotion() {
     // second emotion
     const handleSecondEmotion = (e) => {
         const selectedSecondEmotion = e.target.value;
+        console.log('Selected Second Emotion:', selectedSecondEmotion);
 
         // Setting the final emotion based on the selected second emotion
         if (["Rage", "Exasperated", "Irritable", "Envy", "Disgust"].includes(selectedSecondEmotion)) {
@@ -159,7 +161,8 @@ function CreateNewEmotion() {
     };
 
     // form submission
-    const handlePostSubmit = async () => {
+    const handlePostSubmit = async (e) => {
+        e.preventDefault();
         try {
             // Step 1: Create Emotion
             const emotionResponse = await fetch('/emotions', {
@@ -179,8 +182,8 @@ function CreateNewEmotion() {
 
             console.log('Emotion created successfully. Emotion ID:', emotionId); // Log the emotion ID
 
-            // storing id for later use - for delete
-            setEmotionId(emotionId)
+            // storing id for later use - for patch & delete
+            //setEmotionId(emotionId)
 
             // Step 2: Create User Emotion using obtained emotionId
             const userEmotionData = {
@@ -201,12 +204,18 @@ function CreateNewEmotion() {
                 throw new Error('Failed to log emotion');
             }
 
+            const userEmotionRecord = await userEmotionResponse.json();
+            const userEmotionId = userEmotionRecord.id;
+
+            //storing id for later use - for patch & delete
+            setEmotionId(userEmotionId);
+
             // Log successful submission to the console
             console.log('Emotion submitted successfully:', {
                 currentUser: currentUser,
                 selectedEmotion: finalEmotion,
-                emotionIntensity: emotionIntensity, 
-                emotionId: emotionId
+                emotionIntensity: emotionIntensity,
+                emotionId: userEmotionId
             });
 
             setSubmissionMessage(`Your emotion ${finalEmotion} with intensity ${emotionIntensity} was submitted successfully.`)
@@ -217,12 +226,14 @@ function CreateNewEmotion() {
         }
     };
 
-    const handlePatch = async () => {
+    const handlePatch = async (e) => {
+        e.preventDefault();
         if (!emotionId) {
             console.error('Emotion ID is null');
             return;
         }
 
+        console.log("Emotion id for patch", emotionId);
         try {
             const response = await fetch(`/user_emotion/${emotionId}`, {
                 method: "PATCH",
@@ -234,7 +245,7 @@ function CreateNewEmotion() {
                 }),
             });
             if (!response.ok) {
-                throw new Error('Failed to delete the emotion');
+                throw new Error('Failed to update emotion intensity');
             }
             console.log('Emotion intensity updated successfully', emotionId);
 
@@ -247,14 +258,16 @@ function CreateNewEmotion() {
     }
 
 
-    const handleDelete = async () => {
+    const handleDelete = async (e) => {
+        e.preventDefault();
         if (!emotionId) {
             console.error('Emotion ID is null');
             return;
         }
+        console.log("Emotion id for delete", emotionId);
 
         try {
-            const response = await fetch(`/emotions/${emotionId}`, {
+            const response = await fetch(`/user_emotion/${emotionId}`, {
                 method: "DELETE"
             });
 
@@ -284,6 +297,9 @@ function CreateNewEmotion() {
             state: { currentUser }
         });
     };
+
+
+
 
 
     return (
@@ -412,3 +428,6 @@ function CreateNewEmotion() {
 };
 
 export default CreateNewEmotion;
+
+
+

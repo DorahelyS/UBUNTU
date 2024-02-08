@@ -175,6 +175,7 @@ def users_by_id(id):
 
     return response
 
+'''
 @app.route("/emotions", methods=['GET', 'POST'])
 def emotions():
 
@@ -217,6 +218,62 @@ def emotions():
         )
 
     return response
+'''
+@app.route("/emotions", methods=['GET', 'POST'])
+def emotions():
+
+    all_emotions = Emotion.query.all()
+
+    if request.method == 'GET':
+        if all_emotions:
+            response = make_response(
+                [emotion.to_dict()
+                 for emotion in all_emotions]
+            )
+        else:
+            response = make_response(
+                {'error': "No emotions found in the DB"},
+                404
+            )
+
+    elif request.method == 'POST':
+        try:
+            new_emotion_form = request.get_json()
+            emotion_name = new_emotion_form.get('emotion')
+
+            # Check if the emotion already exists in the database
+            existing_emotion = Emotion.query.filter_by(emotion=emotion_name).first()
+
+            if existing_emotion:
+                # If the emotion exists, return its ID
+                response_data = {'id': existing_emotion.id, 'emotion': existing_emotion.emotion}
+                response = make_response(
+                    jsonify(response_data),
+                    200
+                )
+            else:
+                # If the emotion doesn't exist, create a new one
+                new_emotion = Emotion(
+                    emotion=emotion_name
+                )
+
+                db.session.add(new_emotion)
+                db.session.commit()
+
+                response = make_response(
+                    new_emotion.to_dict(),
+                    201
+                )
+
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+            response = make_response(
+                {'error': 'Cannot make new emotion'},
+                500
+            )
+
+    return response
+
 
 @app.route("/emotions/<int:id>", methods=['GET', 'PATCH', 'DELETE'])
 def emotions_by_id(id):
@@ -440,11 +497,15 @@ def user_emotion():
 
     return response
 
+
+
 @app.route("/user_emotion/<int:id>", methods=['GET', 'PATCH', 'DELETE'])
 def user_emotion_by_id(id):
 
-    user_emotion_by_id = UserEmotion.query.filter(
-        UserEmotion.id == id).first()
+    #user_emotion_by_id = UserEmotion.query.filter(
+        #UserEmotion.id == id).first()
+
+    user_emotion_by_id = UserEmotion.query.get(id)
 
     if user_emotion_by_id:
         if request.method == 'GET':
@@ -499,8 +560,42 @@ def user_emotion_by_id(id):
         )
 
     return response
+    
 
+
+'''
+@app.route("/user_emotion/<int:id>", methods=['PATCH'])
+def user_emotion_by_id(id):
+    user_emotion_by_id = UserEmotion.query.get(id)  # Retrieve user-emotion entry by ID
+
+    if user_emotion_by_id:
+        try:
+            update_form = request.get_json()
+
+            # Update the attributes of the user-emotion entry
+            if 'emotion_intensity' in update_form:
+                user_emotion_by_id.emotion_intensity = update_form['emotion_intensity']
+
+            # Commit the changes to the database
+            db.session.commit()
+
+            response = make_response(
+                user_emotion_by_id.to_dict(),
+                202
+            )
+        except:
+            response = make_response(
+                {'error': 'Cannot update'},
+                405
+            )
+    else:
+        response = make_response(
+            {'error': "Nothing with that id"},
+            404
+        )
+
+    return response
+'''
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
-

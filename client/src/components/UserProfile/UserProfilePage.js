@@ -18,6 +18,14 @@ function UserProfilePage() {
 
     const greetingMessage = currentUser ? `Hello, ${currentUser.username}` : '';
 
+
+     // navigating back to log in
+     const handleNavigateToLogin = () => {
+        navigate('/', {
+            state: { currentUser }
+        });
+    };
+
     const handleCreateNewEmotion = () => {
         navigate('/New-Emotion', {
             state: { currentUser }
@@ -27,8 +35,9 @@ function UserProfilePage() {
     return (
         <div>
             <div style={{ textAlign: 'center', fontWeight: 'bold', marginTop: '20px' }}>{greetingMessage}</div>
+            <button onClick={handleNavigateToLogin}>Logout</button>
             <button onClick={handleCreateNewEmotion}>Log New Emotion</button>
-            <CreateNewEmotion currentUser={currentUser} state={state} />
+            {/*<CreateNewEmotion currentUser={currentUser} state={state} /> */}
         </div>
     );
 }

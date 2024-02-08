@@ -41,7 +41,7 @@ class Emotion(db.Model, SerializerMixin):
     # creating columns
     id = db.Column(db.Integer, primary_key=True)
     emotion = db.Column(db.String)
-    date_stamp = db.Column(db.DateTime, server_default=db.func.now())
+    #date_stamp = db.Column(db.DateTime, server_default=db.func.now())
 
     # creating ORM relationships - through the model aka class
     # emotion = db.relationship('Emotion' , back_populates='emotions_users')
@@ -68,6 +68,7 @@ class UserEmotion(db.Model, SerializerMixin):
 
     # creating columns
     emotion_intensity = db.Column(db.Integer)
+    date_stamp = db.Column(db.DateTime, server_default=db.func.now())
 
     # creating ORM relationships - through the model aka class
     user = db.relationship('User', back_populates='users_emotions')
