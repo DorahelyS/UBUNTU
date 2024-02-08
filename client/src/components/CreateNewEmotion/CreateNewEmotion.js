@@ -26,6 +26,7 @@ function CreateNewEmotion() {
     const [submissionMessage, setSubmissionMessage] = useState(null);
     const [emotionId, setEmotionId] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const [patchMessage, setPatchMessage] = useState(null);
 
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
@@ -204,7 +205,8 @@ function CreateNewEmotion() {
             console.log('Emotion submitted successfully:', {
                 currentUser: currentUser,
                 selectedEmotion: finalEmotion,
-                emotionIntensity: emotionIntensity
+                emotionIntensity: emotionIntensity, 
+                emotionId: emotionId
             });
 
             setSubmissionMessage(`Your emotion ${finalEmotion} with intensity ${emotionIntensity} was submitted successfully.`)
@@ -215,23 +217,54 @@ function CreateNewEmotion() {
         }
     };
 
+    const handlePatch = async () => {
+        if (!emotionId) {
+            console.error('Emotion ID is null');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/emotions/${emotionId}`, {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    emotion_intensity: emotionIntensity
+                }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to delete the emotion');
+            }
+            console.log('Emotion intensity updated successfully', emotionId);
+
+            setEmotionId(null);
+            setPatchMessage('Updated successfully')
+
+        } catch (error) {
+            console.error('Error:', error.message);
+            setErrorMessage('Failed to delete the emotion');
+        }
+    }
+
+
     const handleDelete = async () => {
         if (!emotionId) {
             console.error('Emotion ID is null');
             return;
         }
-    
+
         try {
             const response = await fetch(`/emotions/${emotionId}`, {
-                method: 'DELETE'
+                method: "DELETE"
             });
-    
+
             if (!response.ok) {
                 throw new Error('Failed to delete the emotion');
             }
-    
-            console.log('Emotion deleted successfully');
-            // You may want to reset emotionId state after successful deletion
+
+            console.log('Emotion deleted successfully', emotionId);
+            // Reset emotionId state after successful deletion
             setEmotionId(null);
         } catch (error) {
             console.error('Error:', error.message);
@@ -365,6 +398,7 @@ function CreateNewEmotion() {
                 <div>
                     <p>{submissionMessage}</p>
                     <button onClick={handleDelete}>Delete</button>
+                    <button onClick={handlePatch}>Update Emotion Intensity</button>
                 </div>
             ) : (
                 <button onClick={handlePostSubmit}>Submit</button>
