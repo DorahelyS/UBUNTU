@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .navbar {
     background-color: rgb(39, 39, 39);
     align-items: center;

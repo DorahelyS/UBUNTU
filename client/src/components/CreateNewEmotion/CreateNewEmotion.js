@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import '../../styling/NewEmotion.css'
+
 // currentUser = the logged in user which holds all their info such as username email etc
 // Refers to the location state provided by React Router, used for passing data between different components as users navigate through the application.
 // I don't need to explicitly use useNavigate unless you have specific navigation requirements within this component.
