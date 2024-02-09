@@ -2,7 +2,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 //import UserProfileNav from "./UserProfileNav"
-import CreateNewEmotion from '../CreateNewEmotion/CreateNewEmotion';
+//import CreateNewEmotion from '../CreateNewEmotion/CreateNewEmotion';
 
 function UserProfilePage() {
     const navigate = useNavigate();
@@ -32,11 +32,20 @@ function UserProfilePage() {
         });
     };
 
+    const handleUserSummary = () => {
+        navigate('/Emotion-Summary', {
+            state: { currentUser }
+        });
+    };
+
+
+
     return (
         <div>
             <div style={{ textAlign: 'center', fontWeight: 'bold', marginTop: '20px' }}>{greetingMessage}</div>
             <button onClick={handleNavigateToLogin}>Logout</button>
             <button onClick={handleCreateNewEmotion}>Log New Emotion</button>
+            <button onClick={handleUserSummary}>See Emotion</button>
             {/*<CreateNewEmotion currentUser={currentUser} state={state} /> */}
         </div>
     );

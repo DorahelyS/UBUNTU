@@ -14,6 +14,16 @@ from models import db, User, Emotion, UserEmotion, Like
 
 #from sqlalchemy import and_
 
+#defining a dictionary kinda like a legend where I associate color with emotion id
+EMOTION_COLORS = {
+    1: 'Violet',
+    2: 'Indigo',
+    3: 'Blue',
+    4: 'Green',
+    5: 'Yellow',
+    6: 'Red'
+}
+
 # Views go here!
 
 @app.route('/')
@@ -509,6 +519,13 @@ def user_emotion_by_id(id):
 
     if user_emotion_by_id:
         if request.method == 'GET':
+            # user_emotion_by_id contains emotion_id
+            emotion_id = user_emotion_by_id.emotion_id
+            if emotion_id in EMOTION_COLORS:
+                emotion_color = EMOTION_COLORS[emotion_id]
+            else:
+                emotion_color = 'gray'  # Default color if emotion ID is not found
+
             response = make_response(
                 user_emotion_by_id.to_dict(),
                 200

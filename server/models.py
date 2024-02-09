@@ -65,8 +65,9 @@ class UserEmotion(db.Model, SerializerMixin):
     # creating table relationships
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     emotion_id = db.Column(db.Integer, db.ForeignKey('emotions.id'))
-
-    # creating columns
+  
+    # creating addittional columns
+    color = db.Column(db.String)
     emotion_intensity = db.Column(db.Integer)
     date_stamp = db.Column(db.DateTime, server_default=db.func.now())
 
@@ -76,6 +77,8 @@ class UserEmotion(db.Model, SerializerMixin):
 
     # serialization rules to stop recursion
     serialize_rules = ('-user.users_emotions', '-emotion.emotions_users')
+
+
 
 # independent model #4
 class Like(db.Model, SerializerMixin):

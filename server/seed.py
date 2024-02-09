@@ -48,12 +48,12 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("Creating join table...")
-        user_emotion_1 = UserEmotion(user_id=1, emotion_id=1, emotion_intensity=4)
-        user_emotion_2 = UserEmotion(user_id=2, emotion_id=2, emotion_intensity=3)
-        user_emotion_3 = UserEmotion(user_id=3, emotion_id=3, emotion_intensity=3)
-        user_emotion_4 = UserEmotion(user_id=1, emotion_id=4, emotion_intensity=4)
-        user_emotion_5= UserEmotion(user_id=1, emotion_id=5, emotion_intensity=1)
-        user_emotion_6 = UserEmotion(user_id=1, emotion_id=6, emotion_intensity=3)
+        user_emotion_1 = UserEmotion(user_id=1, emotion_id=1, color='Violet', emotion_intensity=4)
+        user_emotion_2 = UserEmotion(user_id=2, emotion_id=2, color='Indigo', emotion_intensity=3)
+        user_emotion_3 = UserEmotion(user_id=3, emotion_id=3, color='Blue', emotion_intensity=3)
+        user_emotion_4 = UserEmotion(user_id=1, emotion_id=4, color='Green', emotion_intensity=4)
+        user_emotion_5= UserEmotion(user_id=1, emotion_id=5, color='Yellow', emotion_intensity=1)
+        user_emotion_6 = UserEmotion(user_id=1, emotion_id=6, color='Red', emotion_intensity=3)
 
         db.session.add_all([user_emotion_1, user_emotion_2, user_emotion_3, user_emotion_4, user_emotion_5, user_emotion_6])
         db.session.commit()
