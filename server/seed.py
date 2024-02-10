@@ -39,7 +39,7 @@ if __name__ == '__main__':
         print("Creating emotions...")
         emotion_1 = Emotion(emotion='Anger')
         emotion_2 = Emotion(emotion='Sadness')
-        emotion_3 = Emotion(emotion='Suprise')
+        emotion_3 = Emotion(emotion='Surprise')
         emotion_4 = Emotion(emotion='Joy')
         emotion_5 = Emotion(emotion='Love')
         emotion_6 = Emotion(emotion='Fear')

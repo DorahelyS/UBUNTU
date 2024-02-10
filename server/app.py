@@ -572,7 +572,7 @@ def user_emotion_by_id(id):
     return response
 
 
-
+#correct one:
 @app.route("/user_emotion", methods=['GET', 'POST'])
 def user_emotion():
     all_user_emotion = UserEmotion.query.all()
@@ -635,8 +635,8 @@ def user_emotion():
 
     return response
 
-'''
 
+'''
 @app.route("/user_emotion", methods=['GET', 'POST'])
 def user_emotion():
     # Get the current user's ID from the request
@@ -757,6 +757,82 @@ def user_emotion_by_id(id):
     return response
 
 '''
+'''
+@app.route("/user_emotion/<int:user_id>", methods=['GET'])
+def user_emotion_by_user_id(user_id):
+    user_emotions = UserEmotion.query.filter_by(user_id=user_id).all()
+
+    if user_emotions:
+        response = make_response(
+            user_emotion.to_dict(),
+            200
+        )
+
+    else:
+         response = make_response(
+            {"error": "emotions not found"},
+            404
+        )
+    
+    return response
+''' 
+'''
+@app.route("/user_emotions/<int:user_id>", methods=['GET'])
+def user_emotion_by_user_id(user_id):
+    user_emotions = UserEmotion.query.filter_by(user_id=user_id).all()
+
+    if user_emotions:
+        emotion_list = [emotion.to_dict() for emotion in user_emotions]
+        return jsonify(emotion_list), 200
+    else:
+        return jsonify({"error": "emotions not found"}), 404
+
+'''
+
+'''
+@app.route("/user_emotion/<int:user_id>", methods=['GET'])
+def user_emotion_by_user_id(user_id):
+    user_emotions = UserEmotion.query.filter_by(user_id=user_id).all()
+
+    if user_emotions:
+        emotion_list = []
+        for emotion in user_emotions:
+            emotion_dict = {
+                'color': emotion.color,
+                'date_stamp': emotion.date_stamp.strftime('%Y-%m-%d %H:%M:%S'),
+                'emotion_id': emotion.emotion_id,
+                'emotion_intensity': emotion.emotion_intensity,
+                'id': emotion.id,
+                'user_id': emotion.user_id
+            }
+            emotion_list.append(emotion_dict)
+
+        return jsonify(emotion_list), 200
+    else:
+        return jsonify({"error": "emotions not found"}), 404
+'''
+
+#correct one
+@app.route("/user_emotions/<int:user_id>", methods=['GET'])
+def get_user_emotions(user_id):
+    user_emotions = UserEmotion.query.filter_by(user_id=user_id).all()
+
+    if user_emotions:
+        emotions_data = []
+        for emotion in user_emotions:
+            emotion_entry = {
+                'id': emotion.id,
+                'user_id': emotion.user_id,
+                'emotion_id': emotion.emotion_id,
+                'emotion_intensity': emotion.emotion_intensity,
+                'date_stamp': emotion.date_stamp.strftime('%Y-%m-%d %H:%M:%S'),
+                'color': emotion.color
+            }
+            emotions_data.append(emotion_entry)
+
+        return jsonify(emotions_data), 200
+    else:
+        return jsonify({"error": "No emotions found for the user"}), 404
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
