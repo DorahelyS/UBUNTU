@@ -458,25 +458,16 @@ def likes_by_id(id):
 '''
 @app.route("/user_emotion", methods=['GET', 'POST'])
 def user_emotion():
+
     all_user_emotion = UserEmotion.query.all()
 
     if all_user_emotion:
         if request.method == 'GET':
-            emotion_data = []
-            for user_emotion in all_user_emotion:
-                emotion_id = user_emotion.emotion_id
-                if emotion_id in EMOTION_COLORS:
-                    emotion_color = EMOTION_COLORS[emotion_id]
-                else:
-                    emotion_color = 'gray'  # Default color if emotion ID is not found
-
-                emotion_entry = {
-                    'date_stamp': user_emotion.date_stamp.strftime('%Y-%m-%d'),  # Convert to string if needed
-                    'color': emotion_color
-                }
-                emotion_data.append(emotion_entry)
-
-            response = make_response(emotion_data, 200)
+            response = make_response(
+                [user_emotion.to_dict()
+                 for user_emotion in all_user_emotion]
+            )
+            pass
         elif request.method == 'POST':
             try:
                 new_user_emotion_form = request.get_json()
@@ -518,6 +509,133 @@ def user_emotion():
     return response
 '''
 
+@app.route("/user_emotion/<int:id>", methods=['GET', 'PATCH', 'DELETE'])
+def user_emotion_by_id(id):
+
+    #user_emotion_by_id = UserEmotion.query.filter(
+        #UserEmotion.id == id).first()
+
+    user_emotion_by_id = UserEmotion.query.get(id)
+
+    if user_emotion_by_id:
+        if request.method == 'GET':
+            response = make_response(
+                user_emotion_by_id.to_dict(),
+                200
+            )
+
+        elif request.method == 'PATCH':
+            try:
+                update_form = request.get_json()
+
+                for attribute in update_form:
+                    setattr(user_emotion_by_id, attribute,
+                            update_form[attribute])
+
+                db.session.add(user_emotion_by_id)
+                db.session.commit()
+
+                response = make_response(
+                    user_emotion_by_id.to_dict(),
+                    202
+                )
+            except:
+                response = make_response(
+                    {'error': 'Cannot update'},
+                    405
+                )
+
+        elif request.method == 'DELETE':
+            try:
+
+                db.session.delete(user_emotion_by_id)
+                db.session.commit()
+
+                response = make_response(
+                    {'success': "Successfully deleted records"},
+                    201
+                )
+
+            except:
+                response = make_response(
+                    {'error': 'Cannot delete'},
+                    405
+                )
+
+            pass
+    else:
+        response = make_response(
+            {'error': "Nothing with that id"},
+            404
+        )
+
+    return response
+
+
+
+@app.route("/user_emotion", methods=['GET', 'POST'])
+def user_emotion():
+    all_user_emotion = UserEmotion.query.all()
+
+    if all_user_emotion:
+        if request.method == 'GET':
+            emotion_data = []
+            for user_emotion in all_user_emotion:
+                emotion_id = user_emotion.emotion_id
+                if emotion_id in EMOTION_COLORS:
+                    emotion_color = EMOTION_COLORS[emotion_id]
+                else:
+                    emotion_color = 'gray'  # Default color if emotion ID is not found
+
+                emotion_entry = {
+                    'date_stamp': user_emotion.date_stamp.strftime('%Y-%m-%d'),  # Convert to string if needed
+                    'color': emotion_color
+                }
+                emotion_data.append(emotion_entry)
+
+            response = make_response(emotion_data, 200)
+        elif request.method == 'POST':
+            try:
+                new_user_emotion_form = request.get_json()
+
+                new_user_emotion = UserEmotion(
+                    user_id=new_user_emotion_form['user_id'],
+                    emotion_id=new_user_emotion_form.get('emotion_id'),
+                    emotion_intensity=new_user_emotion_form.get('emotion_intensity'),
+                    color=EMOTION_COLORS.get(new_user_emotion_form.get('emotion_id'), 'gray')
+                )
+
+                db.session.add(new_user_emotion)
+                db.session.commit()
+
+                response = make_response(
+                    new_user_emotion.to_dict(),
+                    201
+                )
+
+            #except Exception as e:
+                #print(f"An error occurred: {str(e)}")
+                #response = make_response(
+                    #{'error': 'Cannot make new user'},
+                    #500
+                #)
+
+            except:
+                response = make_response(
+                    {'error': 'Cannot make new compliment'},
+                    500
+                )
+
+            pass
+    else:
+        response = make_response(
+            {'error': "No found in the DB"},
+            404
+        )
+
+    return response
+
+'''
 
 @app.route("/user_emotion", methods=['GET', 'POST'])
 def user_emotion():
@@ -605,10 +723,7 @@ def user_emotion():
 
         return response
 
-    
 
-
-'''
 @app.route("/user_emotion/<int:id>", methods=['PATCH'])
 def user_emotion_by_id(id):
     user_emotion_by_id = UserEmotion.query.get(id)  # Retrieve user-emotion entry by ID
@@ -640,62 +755,6 @@ def user_emotion_by_id(id):
         )
 
     return response
-
-'''
-'''
-
-@app.route("/user_emotion", methods=['GET', 'POST'])
-def user_emotion():
-
-    all_user_emotion = UserEmotion.query.all()
-
-    if all_user_emotion:
-        if request.method == 'GET':
-            response = make_response(
-                [user_emotion.to_dict()
-                 for user_emotion in all_user_emotion]
-            )
-            pass
-        elif request.method == 'POST':
-            try:
-                new_user_emotion_form = request.get_json()
-
-                new_user_emotion = UserEmotion(
-                    user_id=new_user_emotion_form['user_id'],
-                    emotion_id=new_user_emotion_form.get('emotion_id'),
-                    emotion_intensity=new_user_emotion_form.get('emotion_intensity')
-                )
-
-                db.session.add(new_user_emotion)
-                db.session.commit()
-
-                response = make_response(
-                    new_user_emotion.to_dict(),
-                    201
-                )
-
-            #except Exception as e:
-                #print(f"An error occurred: {str(e)}")
-                #response = make_response(
-                    #{'error': 'Cannot make new user'},
-                    #500
-                #)
-
-            except:
-                response = make_response(
-                    {'error': 'Cannot make new compliment'},
-                    500
-                )
-
-            pass
-    else:
-        response = make_response(
-            {'error': "No found in the DB"},
-            404
-        )
-
-    return response
-
 
 '''
 
