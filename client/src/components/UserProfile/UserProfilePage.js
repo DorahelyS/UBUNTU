@@ -32,7 +32,13 @@ function UserProfilePage() {
         });
     };
 
-    const handleUserSummary = () => {
+    const handleNewJournal = () => {
+        navigate('/New-Journal', {
+            state: { currentUser }
+        });
+    };
+
+    const handleEmotionSummary = () => {
         navigate('/Emotion-Summary', {
             state: { currentUser }
         });
@@ -42,10 +48,12 @@ function UserProfilePage() {
 
     return (
         <div className="bg-emerald-50 flex flex-col items-center justify-start h-screen">
-            <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
+            <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
             <div className=" font-mono text-center font-bold mt-32 text-2xl">{greetingMessage}</div>
-            <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleCreateNewEmotion}>Log New Emotion</button>
-            <button className="bg-red-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleUserSummary}>See Emotion</button>
+            <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleCreateNewEmotion}>Log </button>
+            <button className="bg-red-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleNewJournal}>Write </button>
+            <button className="bg-sky-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleEmotionSummary}>Track </button>
+
         </div>
     );
 }

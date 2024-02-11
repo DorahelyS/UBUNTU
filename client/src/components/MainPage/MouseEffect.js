@@ -7,8 +7,8 @@ const MouseEffect = () => {
 
     useEffect(() => {
         const updateMousePosition = (e) => {
-            
-            const maxPositions = 50; 
+
+            const maxPositions = 50;
 
             setPositions(prevPositions => [
                 ...prevPositions.slice(-maxPositions + 1),

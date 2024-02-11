@@ -5,15 +5,18 @@ body {
 
 .main {
     /* Set the background image */
-    background-image: url('../../public/FE37102A-C266-413F-B2EF-A0F7B216B0F4.JPG');
-
+    background-image: url('../../public/Option 1.png');
+  
     /* Adjust background properties as needed */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
-
+  
+    /* Position the overlay */
+    position: relative;
 }
+
+
 
 .mouse-effect {
     position: absolute;

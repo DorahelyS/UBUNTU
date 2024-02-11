@@ -309,7 +309,7 @@ function CreateNewEmotion() {
             <div className="flex justify-end items-start mt-5 mr-5 space-x-4">
                     {/* Buttons for form submission and navigation */}
                     <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToUserProfile}>Home</button>
-                    <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToLogin}>Logout</button>
+                    <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToLogin}>Logout</button>
             </div>
             <div className="flex justify-center items-center h-screen">
             <div>

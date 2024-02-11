@@ -108,7 +108,7 @@ function LoginForm() {
                     />
                     {formik.errors.email && <p className="error">{formik.errors.email}</p>}
                     <div className="button-container">
-                        <button type="submit" className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded">Login</button>
+                        <button type="submit" className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full">Login</button>
                     </div>
                 </div>
             </form>
