@@ -41,12 +41,11 @@ function UserProfilePage() {
 
 
     return (
-        <div>
-            <div style={{ textAlign: 'center', fontWeight: 'bold', marginTop: '20px' }}>{greetingMessage}</div>
-            <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded mr-3" onClick={handleNavigateToLogin}>Logout</button>
-            <button className="bg-yellow-500 hover:bg-yello-300 text-white py-2 px-4 rounded mr-3" onClick={handleCreateNewEmotion}>Log New Emotion</button>
-            <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded" onClick={handleUserSummary}>See Emotion</button>
-            {/*<CreateNewEmotion currentUser={currentUser} state={state} /> */}
+        <div className="bg-emerald-50 flex flex-col items-center justify-start h-screen">
+            <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
+            <div className=" font-mono text-center font-bold mt-32 text-2xl">{greetingMessage}</div>
+            <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleCreateNewEmotion}>Log New Emotion</button>
+            <button className="bg-red-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleUserSummary}>See Emotion</button>
         </div>
     );
 }

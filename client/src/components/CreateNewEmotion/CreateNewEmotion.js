@@ -306,6 +306,12 @@ function CreateNewEmotion() {
 
     return (
         <div>
+            <div className="flex justify-end items-start mt-5 mr-5 space-x-4">
+                    {/* Buttons for form submission and navigation */}
+                    <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToUserProfile}>Home</button>
+                    <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToLogin}>Logout</button>
+            </div>
+            <div className="flex justify-center items-center h-screen">
             <div>
                 {/* Primary emotion */}
                 <label>Select Primary Emotion:</label>
@@ -382,7 +388,6 @@ function CreateNewEmotion() {
             {console.log("Second Options:", secondOption)}
             {console.log("Second Options Length:", secondOption.length)}
 
-
             {secondOption.length > 0 && (
                 <div>
                     {/* second emotion */}
@@ -414,17 +419,17 @@ function CreateNewEmotion() {
             {submissionMessage ? (
                 <div>
                     <p>{submissionMessage}</p>
-                    <button onClick={handleDelete}>Delete Entire Emotion Log</button>
-                    <button onClick={handlePatch}>Update Emotion Intensity</button>
+                    <button className="rounded-full" onClick={handleDelete}>Delete Entire Emotion Log</button>
+                    <button className="rounded-full" onClick={handlePatch}>Update Emotion Intensity</button>
                 </div>
             ) : (
-                <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded mr-3" onClick={handlePostSubmit}>Submit</button>
+                <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mr-3" onClick={handlePostSubmit}>Submit</button>
             )}
 
+            </div>
+    
+            
 
-            {/* Buttons for form submission and navigation */}
-            <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded mr-3" onClick={handleNavigateToUserProfile}>Home</button>
-            <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded" onClick={handleNavigateToLogin}>Logout</button>
         </div>
     );
 };

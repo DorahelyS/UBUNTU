@@ -85,6 +85,10 @@ function UserSummary() {
 
     return (
         <div>
+             <div className="flex justify-end">
+                <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full mt-5 mr-5" onClick={handleNavigateToUserProfile}>Home</button>
+                <button className="bg-red-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
+            </div>
             <h2 className="text-xl font-bold mb-4">Emotion Summary for {currentUser.username}</h2>
             <div>
                 {console.log('Emotion Data:', emotionData)}
@@ -96,10 +100,6 @@ function UserSummary() {
                         <p><strong>Color:</strong> {emotion.color}</p>
                     </div>
                 ))}
-            </div>
-            <div className="mt-8">
-                <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded mr-3" onClick={handleNavigateToUserProfile}>Home</button>
-                <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded" onClick={handleNavigateToLogin}>Logout</button>
             </div>
         </div>
     );
