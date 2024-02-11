@@ -86,7 +86,7 @@ function LoginForm() {
     return (
         <div className="login-container">
             <form onSubmit={formik.handleSubmit}>
-                <div className="input-group">
+                <div className="input-group mb-4">
                     <input
                         id="username"
                         name="username"
@@ -97,7 +97,7 @@ function LoginForm() {
                     />
                     {formik.errors.username && <p className="error">{formik.errors.username}</p>}
                 </div>
-                <div className="input-group">
+                <div className="input-group mb-4">
                     <input
                         id="email"
                         name="email"
@@ -108,7 +108,7 @@ function LoginForm() {
                     />
                     {formik.errors.email && <p className="error">{formik.errors.email}</p>}
                     <div className="button-container">
-                        <button type="submit">Login</button>
+                        <button type="submit" className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded">Login</button>
                     </div>
                 </div>
             </form>

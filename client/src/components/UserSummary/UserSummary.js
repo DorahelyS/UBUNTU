@@ -1,7 +1,7 @@
 // lets me use react library
 import React, { useState, useEffect } from 'react';
-
 import { useLocation, useNavigate } from 'react-router-dom';
+import '../../styling/EmotionSummary.css'
 
 /*
 function UserSummary() {
@@ -85,20 +85,22 @@ function UserSummary() {
 
     return (
         <div>
-            <h2>Emotion Summary for {currentUser.username}</h2>
-            <ul>
+            <h2 className="text-xl font-bold mb-4">Emotion Summary for {currentUser.username}</h2>
+            <div>
                 {console.log('Emotion Data:', emotionData)}
                 {emotionData.map((emotion, index) => (
-                    <li key={index}>
-                        <p>Emotion ID: {emotion.emotion_id}</p>
-                        <p>Intensity: {emotion.emotion_intensity}</p>
-                        <p>Date: {emotion.date_stamp}</p>
-                        <p>Color: {emotion.color}</p>
-                    </li>
+                    <div key={index} className="emotion-box" style={{ backgroundColor: emotion.color }}>
+                        <p><strong>Emotion ID:</strong> {emotion.emotion_id}</p>
+                        <p><strong>Intensity:</strong> {emotion.emotion_intensity}</p>
+                        <p><strong>Date:</strong> {emotion.date_stamp}</p>
+                        <p><strong>Color:</strong> {emotion.color}</p>
+                    </div>
                 ))}
-            </ul>
-            <button onClick={handleNavigateToUserProfile}>Home</button>
-            <button onClick={handleNavigateToLogin}>Logout</button>
+            </div>
+            <div className="mt-8">
+                <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded mr-3" onClick={handleNavigateToUserProfile}>Home</button>
+                <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded" onClick={handleNavigateToLogin}>Logout</button>
+            </div>
         </div>
     );
 }

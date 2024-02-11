@@ -4,3 +4,9 @@
     align-items: center;
     height: 100vh; /* Set the height of the container to fill the viewport */
 }
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+}

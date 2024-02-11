@@ -16,7 +16,7 @@ function UserProfilePage() {
     // Extract currentUser from state, or default to null if it doesn't exist
     const currentUser = state && state.currentUser ? state.currentUser : null;
 
-    const greetingMessage = currentUser ? `Hello, ${currentUser.username}` : '';
+    const greetingMessage = currentUser ? `Hi, ${currentUser.username} ☀️ How are you feeling today?` : '';
 
 
      // navigating back to log in
@@ -43,9 +43,9 @@ function UserProfilePage() {
     return (
         <div>
             <div style={{ textAlign: 'center', fontWeight: 'bold', marginTop: '20px' }}>{greetingMessage}</div>
-            <button onClick={handleNavigateToLogin}>Logout</button>
-            <button onClick={handleCreateNewEmotion}>Log New Emotion</button>
-            <button onClick={handleUserSummary}>See Emotion</button>
+            <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded mr-3" onClick={handleNavigateToLogin}>Logout</button>
+            <button className="bg-yellow-500 hover:bg-yello-300 text-white py-2 px-4 rounded mr-3" onClick={handleCreateNewEmotion}>Log New Emotion</button>
+            <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded" onClick={handleUserSummary}>See Emotion</button>
             {/*<CreateNewEmotion currentUser={currentUser} state={state} /> */}
         </div>
     );

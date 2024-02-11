@@ -418,13 +418,13 @@ function CreateNewEmotion() {
                     <button onClick={handlePatch}>Update Emotion Intensity</button>
                 </div>
             ) : (
-                <button onClick={handlePostSubmit}>Submit</button>
+                <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded mr-3" onClick={handlePostSubmit}>Submit</button>
             )}
 
 
             {/* Buttons for form submission and navigation */}
-            <button onClick={handleNavigateToUserProfile}>Home</button>
-            <button onClick={handleNavigateToLogin}>Logout</button>
+            <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded mr-3" onClick={handleNavigateToUserProfile}>Home</button>
+            <button className="bg-red-500 hover:bg-red-300 text-white py-2 px-4 rounded" onClick={handleNavigateToLogin}>Logout</button>
         </div>
     );
 };

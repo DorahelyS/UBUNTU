@@ -758,7 +758,7 @@ def user_emotion_by_id(id):
 
 '''
 '''
-@app.route("/user_emotion/<int:user_id>", methods=['GET'])
+@app.route("/user_emotions/<int:user_id>", methods=['GET'])
 def user_emotion_by_user_id(user_id):
     user_emotions = UserEmotion.query.filter_by(user_id=user_id).all()
 
@@ -775,7 +775,7 @@ def user_emotion_by_user_id(user_id):
         )
     
     return response
-''' 
+'''
 '''
 @app.route("/user_emotions/<int:user_id>", methods=['GET'])
 def user_emotion_by_user_id(user_id):
