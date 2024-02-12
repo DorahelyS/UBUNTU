@@ -1,7 +1,9 @@
 // lets me use react library
 import React, { useState, useEffect } from "react";
+//import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Formik, useFormik, ErrorMessage } from "formik";
+//import { Formik, useFormik, ErrorMessage } from "formik";
+import {useFormik} from "formik"
 //yup is needed for schema => yup tells formik this is the structure & takes care of validations
 import * as yup from "yup";
 // remember . represents current directory - this location
@@ -11,14 +13,19 @@ import '../../styling/LoginForm.css'
 
 // declares a component - each component is a function - making a separate component for the login form
 function LoginForm() {
-    const navigate = useNavigate()
-
     const location = useLocation();
+    const navigate = useNavigate()
+    const { state } = location;
 
     //for debugging to check path location 
     useEffect(() => {
-        console.log('Current pathname:', location.pathname);
+       console.log('Current pathname:', location.pathname);
     }, [location]);
+
+   
+    //const currentUser = state ? state.currentUser : null;
+    //console.log('Current pathname:', location.pathname);
+    //console.log("current state:", state)
 
 
 
@@ -118,100 +125,3 @@ function LoginForm() {
 
 // need to export the fucnction aka component if and when other components may want to use
 export default LoginForm;
-
-// need to also import LoginForm  to Login.js
-
-
-/*
-        onSubmit: (values) => {
-                // here is were post request is made but not posting a new user I want to get user
-                // I am sending request to the backend server /users url to fecth all the user data
-                // console.log(values)
-                fetch(`/login`)
-                    // here is the response is successful it will convert the response (res) to JSON notation
-                    .then((res) => {
-                        if (res.ok) {
-                            return res.json();
-                        }
-                        throw new Error("Invalid credentials");
-                    })
-                    // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
-                    // the next frontend route which is /UserProfile
-                    .then((data) => {
-                        // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
-                        // the currentUser data is available 
-                        navigate(`/User-Profile`, {
-                            state: { currentUser: data },
-                        });
-                    })
-                    //if any errors - errors will be longed to the console
-                    .catch((error) => {
-                        console.log(error.message);
-                    });
-            },
-*/
-
-
-/*
- fetch("/login", {
-                method: 'POST',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify(values)
-            })
-                .then((res) => {
-                    if (res.ok) {
-                        return res.json();
-                    }
-                    throw new Error("Invalid credentials");
-                })
-                // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
-                // the next frontend route which is /UserProfile
-                .then((data) => {
-                    // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
-                    // the currentUser data is available 
-                    navigate(`/User-Profile`, {
-                        state: { currentUser: data },
-                    });
-                })
-                //if any errors - errors will be longed to the console
-                .catch((error) => {
-                    console.log(error.message);
-                });
-        },
-*/
-
-/*
- onSubmit: () => {
-            // here is were post request is made but not posting a new user I want to get user
-            // I am sending request to the backend server /users url to fecth all the user data
-            // console.log(values)
-            fetch("/users")
-                // here is the response is successful it will convert the response (res) to JSON notation
-                .then((res) => {
-                    if (res.ok) {
-                        return res.json();
-                    }
-                    throw new Error("Invalid credentials");
-                })
-                // here I am processing the returned JSON data and if it was successfully fetch it will navigate to the
-                // the next frontend route which is /UserProfile
-                .then((data) => {
-                    data.forEach((currentUser) => {
-                        if (
-                            currentUser.username === formik.values.username && currentUser.email === formik.values.email){
-                    // also passing along the user data retrieved - so that when a user clicks login and is navigated to /UserProfile
-                    // the currentUser data is available 
-                        navigate(`/User-Profile`, {
-                            state: { currentUser: data },
-                        });
-                    }
-                })
-            })
-
-                //if any errors - errors will be longed to the console
-                .catch((error) => {
-                    console.log(error.message);
-                });
-        },
-    });
-*/

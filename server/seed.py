@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Emotion, UserEmotion, Like
+from models import db, User, Emotion, UserEmotion, Journal
 
 if __name__ == '__main__':
     fake = Faker()
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         User.query.delete()
         Emotion.query.delete()
         UserEmotion.query.delete()
-        Like.query.delete()
+        Journal.query.delete()
 
         db.session.commit()
 
@@ -61,12 +61,12 @@ if __name__ == '__main__':
         db.session.add_all([user_emotion_1, user_emotion_2, user_emotion_3, user_emotion_4, user_emotion_5, user_emotion_6])
         db.session.commit()
 
-        print("Creating like table...")
-        like_1 = Like(user_id=1, emotion_id=2)
-        like_2 = Like(user_id=2, emotion_id=3)
-        like_3 = Like(user_id=3, emotion_id=2)
+        print("Creating journal table...")
+        entry_1 = Journal(user_id=1, entry='test entry for user 1')
+        entry_2 = Journal(user_id=3, entry='test entry for user 3')
+        entry_3 = Journal(user_id=5, entry='test entry for user 5')
 
-        db.session.add_all([like_1, like_2, like_3])
+        db.session.add_all([entry_1, entry_2, entry_3])
         db.session.commit()
         
         print("Seeding complete...")

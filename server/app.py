@@ -10,7 +10,7 @@ from flask_restful import Resource
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import db, User, Emotion, UserEmotion, Like
+from models import db, User, Emotion, UserEmotion, Journal
 
 #from sqlalchemy import and_
 
@@ -185,50 +185,8 @@ def users_by_id(id):
 
     return response
 
-'''
-@app.route("/emotions", methods=['GET', 'POST'])
-def emotions():
 
-    all_emotions = Emotion.query.all()
 
-    if all_emotions:
-        if request.method == 'GET':
-            response = make_response(
-                [emotion.to_dict()
-                 for emotion in all_emotions]
-            )
-            pass
-        elif request.method == 'POST':
-            try:
-                new_emotion_form = request.get_json()
-
-                new_emotion = Emotion(
-                    emotion=new_emotion_form.get('emotion')
-                )
-
-                db.session.add(new_emotion)
-                db.session.commit()
-
-                response = make_response(
-                    new_emotion.to_dict(),
-                    201
-                )
-
-            except:
-                response = make_response(
-                    {'error': 'Cannot make new emotion'},
-                    500
-                )
-
-            pass
-    else:
-        response = make_response(
-            {'error': "No emotion found in the DB"},
-            404
-        )
-
-    return response
-'''
 @app.route("/emotions", methods=['GET', 'POST'])
 def emotions():
 
@@ -350,7 +308,7 @@ def emotions_by_id(id):
 
     return response
 
-
+'''
 @app.route("/likes", methods=['GET', 'POST'])
 def likes():
 
@@ -395,6 +353,8 @@ def likes():
 
     return response
 
+'''
+'''
 @app.route("/likes/<int:id>", methods=['GET', 'PATCH', 'DELETE'])
 def likes_by_id(id):
 
@@ -454,6 +414,7 @@ def likes_by_id(id):
         )
 
     return response
+'''
 
 '''
 @app.route("/user_emotion", methods=['GET', 'POST'])
@@ -833,6 +794,63 @@ def get_user_emotions(user_id):
         return jsonify(emotions_data), 200
     else:
         return jsonify({"error": "No emotions found for the user"}), 404
+
+
+@app.route("/journals", methods=['GET', 'POST'])
+def journal_entries():
+    all_journals = Journal.query.all()
+
+    if request.method == 'GET':
+        if all_journals:
+            response = make_response(
+                [journal.to_dict()
+                 for journal in all_journals]
+            )
+        else:
+            response = make_response(
+                {'error': "No emotions found in the DB"},
+                404
+            )
+    elif request.method == 'POST':
+        try:
+            new_journal_form = request.get_json()
+            #have to make sure when creating a new instance the keywords much match the class attributes 
+            #you need to use these exact attribute names as keyword arguments
+            new_journal = Journal(
+                entry=new_journal_form['entry'],
+                user_id=new_journal_form['user_id']
+            )
+
+            db.session.add(new_journal)
+            db.session.commit()
+
+            response = make_response(
+                new_journal.to_dict(),
+                201
+            )
+        #except Exception as e:
+            #print(f"An error occurred: {str(e)}")
+            #response = make_response(
+                #{'error': 'Cannot make new journal entry'},
+                #500
+            #)
+            
+        except:
+            response = make_response(
+                {'error': 'Cannot make new journal entry'},
+                500
+            )
+
+        pass
+    else:
+        response = make_response(
+            {'error': "No journal entries found in the DB"},
+            404
+        )
+
+    return response
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

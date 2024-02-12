@@ -24,13 +24,13 @@ class User(db.Model, SerializerMixin):
     users_emotions = db.relationship('UserEmotion', back_populates='user')
 
     # user_like = db.relationship('User', back_populates='users_likes')
-    users_likes = db.relationship('Like', back_populates='user_like')
+    #users_likes = db.relationship('Like', back_populates='user_like')
 
     # user_journal = db.relationship('User', back_populates='journals')
-    # journals = db.relationship('Journal', back_populates='user_journal')
+    journals = db.relationship('Journal', back_populates='user_journal')
 
     # serialization rules to stop recursion
-    serialize_rules = ('-users_emotions.user', '-users_emotions.emotion', '-users_likes.emotion_like','-users_likes.user_like')
+    serialize_rules = ('-users_emotions.user', '-users_emotions.emotion', 'journals.user_journal')
 
 
 # independent model #2
@@ -48,7 +48,7 @@ class Emotion(db.Model, SerializerMixin):
     emotions_users = db.relationship('UserEmotion', back_populates='emotion')
 
     # emotion_like = db.relationship('Emotion' , back_populates='emotions_likes')
-    emotions_likes = db.relationship('Like', back_populates='emotion_like')
+    #emotions_likes = db.relationship('Like', back_populates='emotion_like')
 
     # serialization rules to stop recursion
     serialize_rules = ('-emotions_users.emotion', '-emotions_users.user','-emotions_likes.user_like','-emotions_likes.emotion_like')
@@ -79,8 +79,36 @@ class UserEmotion(db.Model, SerializerMixin):
     serialize_rules = ('-user.users_emotions', '-emotion.emotions_users')
 
 
+# independent model #4 
+class Journal(db.Model, SerializerMixin):
+    #table name
+    __tablename__ = "journals"
 
-# independent model #4
+    #creating columns
+    id = db.Column(db.Integer, primary_key=True)
+    #creating table relationships
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    #creating additional columns
+    entry = db.Column(db.String(150))
+
+    #creating ORM relationships - through the model aka class
+    user_journal = db.relationship('User', back_populates='journals')
+
+    # serialization rules to stop recursion
+    serialize_rules = ('-user_journal.journals', )
+
+    
+    @validates('entry')
+    def journal_entry(self, key, value):
+        if len(value) > 150:
+            raise ValueError("Journal entry must be less than or equal to 150 words")
+        return value
+    
+
+
+'''
+# independent model #5 - STRETCH GOAL
 class Like(db.Model, SerializerMixin):
     # table name
     __tablename__ = "likes"
@@ -98,19 +126,4 @@ class Like(db.Model, SerializerMixin):
 
     # serialization rules to stop recursion
     serialize_rules = ('-user_like.users_likes', '-emotion_like.emotions_likes')
-
-'''
-# independent model #5 - STRETCH GOAL
-class Journal(db.Model, SerializerMixin):
-    #table name
-    __tablename__ = "journals"
-
-    #creating columns
-    id = db.Column(db.Integer, primary_key=True)
-
-    #creating table relationships
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-    #creating ORM relationships - through the model aka class
-    user_journal = db.relationship('User', back_populates='journals')
 '''
