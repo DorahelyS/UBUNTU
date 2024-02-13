@@ -35,23 +35,23 @@ function UserSummary() {
         }
     }, [currentUser]);
 
-/* having a hard time implenting this - will be a stretch goal can't get the emotion color which is logged to backend with date stamp to 
-sync with grid box - thought maybe I could do if backend date stamp matches frontend date stamp then create color 
-
-below: was trying to make each box in the grid by date stamp but did not work
-
-    // Define calculateColumn and calculateRow functions
-    const calculateColumn = (dateStamp) => {
-        const date = new Date(dateStamp);
-        return date.getMonth() + 2; // Months start from 0, so we add 2 to get the correct column index
-    };
-
-
-    const calculateRow = (dateStamp) => {
-        const date = new Date(dateStamp);
-        return date.getDate() + 1; // Add 1 to get the correct row index (dates start from 1)
-    };
-*/
+    /* having a hard time implenting this - will be a stretch goal can't get the emotion color which is logged to backend with date stamp to 
+    sync with grid box - thought maybe I could do if backend date stamp matches frontend date stamp then create color 
+    
+    below: was trying to make each box in the grid by date stamp but did not work
+    
+        // Define calculateColumn and calculateRow functions
+        const calculateColumn = (dateStamp) => {
+            const date = new Date(dateStamp);
+            return date.getMonth() + 2; // Months start from 0, so we add 2 to get the correct column index
+        };
+    
+    
+        const calculateRow = (dateStamp) => {
+            const date = new Date(dateStamp);
+            return date.getDate() + 1; // Add 1 to get the correct row index (dates start from 1)
+        };
+    */
 
     // navigating back to User-Profile
     const handleNavigateToUserProfile = () => {
@@ -77,11 +77,8 @@ below: was trying to make each box in the grid by date stamp but did not work
                 <div className="border-4 border-black p-4">
                     <div className="grid grid-cols-13 grid-rows-32 gap-2">
                         {emotionData.map((emotion, index) => (
-                            <div
-                                key={index}
-                                className={`col-start-${calculateColumn(emotion.date_stamp)} row-start-${calculateRow(emotion.date_stamp)} m-2`}
-                            >
-                                <div className="emotion-box w-6 h-6" style={{ backgroundColor: emotion.color }}>
+                            <div>
+                                <div key={index} className="emotion-box w-6 h-6" style={{ backgroundColor: emotion.color }}>
                                     {/*<p>{emotion.color} </p> */}
                                 </div>
                             </div>
