@@ -1,5 +1,4 @@
 # UBUNTU
-# TEST TESST 
 
 # DESCRIPTION
 Ububtu is a full-stack application using React for fronend and Flask for backend, allowing users to track daily emotions and recieve an 'emotional wrap-up' for insigts on stressors throughout the calendar year to ignite healty discussions creating a positive workplace environnment.
