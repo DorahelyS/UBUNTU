@@ -68,3 +68,18 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+# steps
+
+1. can clone template from flatiorn school
+2. follow steps on website
+
+# once backend and frontend are linked
+pipenv shell
+cd server
+python app.py
+
+cd client
+npm start 

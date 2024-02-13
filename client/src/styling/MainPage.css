@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    /* Set the background image */
+    background-image: url('../../public/Option 1.png');
+  
+    /* Adjust background properties as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    /* Position the overlay */
+    position: relative;
+}
+
+
+
+.mouse-effect {
+    position: absolute;
+    font-size: 10px;
+    pointer-events: none;
+}
+
+
+
+
+
+
