@@ -14,6 +14,7 @@ function CreateNewJournalEntry() {
 
     // State variable to hold journal entries
     const [journalEntries, setJournalEntries] = useState([]);
+    const [submissionMessage, setSubmissionMessage] = useState(null);
 
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
@@ -58,6 +59,7 @@ function CreateNewJournalEntry() {
                     journalEntry: data,
                     journalEntryId: journalEntryId
                 });
+                setSubmissionMessage('submitted!')
 
             } catch (error) {
                 console.error('Error:', error.message);
@@ -83,19 +85,29 @@ function CreateNewJournalEntry() {
                 <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full mt-5 mr-5" onClick={handleNavigateToUserProfile}>Home</button>
                 <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
             </div>
-            <form onSubmit={formik.handleSubmit} className="form">
-                <label> JOURNAL ENTRY</label>
-                <input
-                    type="text"
-                    name="entry"
-                    onChange={formik.handleChange}
-                    value={formik.values.entry}
-                />
-                {formik.errors.entry && <div className="error">{formik.errors.entry}</div>}
-                <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mr-3" type="submit">Submit</button>
-            </form>
-
-            {/* Optional: Display journal entries */}
+            <div className="flex flex-col items-center justify-center h-screen">
+                <form onSubmit={formik.handleSubmit} className="form flex flex-col items-center">
+                <label  className="text-xl ">JOURNAL ENTRY:</label>
+                    <div>
+                        <input
+                            type="text"
+                            name="entry"
+                            placeholder="&quot;I write entirely to find out what I'm thinking... &quot;"
+                            onChange={formik.handleChange}
+                            value={formik.values.entry}
+                            className="border border-stone-700 rounded-full px-3 py-2 focus:border-stone-300 mt-5 ml-5 w-96 text-xs"
+                        />
+                    </div>
+                    {formik.errors.entry && <div className="error">{formik.errors.entry}</div>}
+                    <div>
+                        <p className="mt-5"> {submissionMessage} </p>
+                        <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mt-5" type="submit">Submit</button>
+                    </div>
+                
+                </form>
+            </div>
+    
+            {/* Optional: Display journal entries 
             <div>
                 <h2>Journal Entries</h2>
                 <ul>
@@ -103,7 +115,7 @@ function CreateNewJournalEntry() {
                         <li key={entry.id}>{entry.entry}</li>
                     ))}
                 </ul>
-            </div>
+                    </div> */}
         </div>
     );
 }

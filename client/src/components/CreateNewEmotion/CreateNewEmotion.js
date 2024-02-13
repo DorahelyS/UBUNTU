@@ -307,128 +307,130 @@ function CreateNewEmotion() {
     return (
         <div>
             <div className="flex justify-end items-start mt-5 mr-5 space-x-4">
-                    {/* Buttons for form submission and navigation */}
-                    <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToUserProfile}>Home</button>
-                    <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToLogin}>Logout</button>
+                {/* Buttons for form submission and navigation */}
+                <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToUserProfile}>Home</button>
+                <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full" onClick={handleNavigateToLogin}>Logout</button>
             </div>
             <div className="flex justify-center items-center h-screen">
-            <div>
-                {/* Primary emotion */}
-                <label>Select Primary Emotion:</label>
-                <select onChange={(e) => { setPrimaryEmotion(e.target.value); setSecondEmotion(''); handleFirstEmotion(e); }}>
-                    <option value="">Select</option>
-                    <option value="Hate">Hate</option>
-                    <option value="Hostile">Hostile</option>
-                    <option value="Agitated">Agitated</option>
-                    <option value="Frustrated">Frustrated</option>
-                    <option value="Annoyed">Annoyed</option>
-                    <option value="Resentful">Resentful</option>
-                    <option value="Jealous">Jealous</option>
-                    <option value="Contempt">Contempt</option>
-                    <option value="Revolted">Revolted</option>
-                    <option value="Agony">Agony</option>
-                    <option value="Hurt">Hurt</option>
-                    <option value="Depressed">Depressed</option>
-                    <option value="Sorrow">Sorrow</option>
-                    <option value="Dismayed">Dismayed</option>
-                    <option value="Displeased">Displeased</option>
-                    <option value="Regretful">Regretful</option>
-                    <option value="Guilty">Guilty</option>
-                    <option value="Isolated">Isolated</option>
-                    <option value="Lonely">Lonely</option>
-                    <option value="Grief">Grief</option>
-                    <option value="Powerless">Powerless</option>
-                    <option value="Shocked">Shocked</option>
-                    <option value="Disillusioned">Disillusioned</option>
-                    <option value="Perplexed">Perplexed</option>
-                    <option value="Astonished">Astonished</option>
-                    <option value="Awe-struck">Awe-struck</option>
-                    <option value="Speechless">Speechless</option>
-                    <option value="Astounded">Astounded</option>
-                    <option value="Stimulated">Stimulated</option>
-                    <option value="Touched">Touched</option>
-                    <option value="Pleased">Pleased</option>
-                    <option value="Satisfied">Satisfied</option>
-                    <option value="Amused">Amused</option>
-                    <option value="Delighted">Delighted</option>
-                    <option value="Jovial">Jovial</option>
-                    <option value="Blissful">Blissful</option>
-                    <option value="Triumphant">Triumphant</option>
-                    <option value="Illustrious">Illustrious</option>
-                    <option value="Eager">Eager</option>
-                    <option value="Hopeful">Hopeful</option>
-                    <option value="Excited">Excited</option>
-                    <option value="Zeal">Zeal</option>
-                    <option value="Euphoric">Euphoric</option>
-                    <option value="Jubilation">Jubilation</option>
-                    <option value="Enchanted">Enchanted</option>
-                    <option value="Rapture">Rapture</option>
-                    <option value="Romantic">Romantic</option>
-                    <option value="Fondness">Fondness</option>
-                    <option value="Sentimental">Sentimental</option>
-                    <option value="Attracted">Attracted</option>
-                    <option value="Passion">Passion</option>
-                    <option value="Infatuation">Infatuation</option>
-                    <option value="Caring">Caring</option>
-                    <option value="Compassionate">Compassionate</option>
-                    <option value="Relieved">Relieved</option>
-                    <option value="Frightened">Frightened</option>
-                    <option value="Helpless">Helpless</option>
-                    <option value="Panic">Panic</option>
-                    <option value="Hysterical">Hysterical</option>
-                    <option value="Inferior">Inferior</option>
-                    <option value="Inadequate">Inadequate</option>
-                    <option value="Worried">Worried</option>
-                    <option value="Anxious">Anxious</option>
-                    <option value="Mortified">Mortified</option>
-                    <option value="Dread">Dread</option>
-                </select>
-            </div>
-            {/* Logging secondOption and its length  to make sure it it filtering correctly*/}
-            {console.log("Second Options:", secondOption)}
-            {console.log("Second Options Length:", secondOption.length)}
-
-            {secondOption.length > 0 && (
                 <div>
-                    {/* second emotion */}
-                    <label>Select Secondary Emotion:</label>
-                    <select onChange={(e) => { setSecondEmotion(e.target.value); handleSecondEmotion(e); }}>
-                        <option value="">Select</option>
-                        {secondOption.map((option) => (
-                            <option key={option} value={option}>{option}</option>
-                        ))}
-                    </select>
+                    {/* Primary emotion */}
+                    <div className="dropdown1">
+                        <label>Select Primary Emotion:</label>
+                        <select onChange={(e) => { setPrimaryEmotion(e.target.value); setSecondEmotion(''); handleFirstEmotion(e); }}>
+                            <option value="">Select</option>
+                            <option value="Hate">Hate</option>
+                            <option value="Hostile">Hostile</option>
+                            <option value="Agitated">Agitated</option>
+                            <option value="Frustrated">Frustrated</option>
+                            <option value="Annoyed">Annoyed</option>
+                            <option value="Resentful">Resentful</option>
+                            <option value="Jealous">Jealous</option>
+                            <option value="Contempt">Contempt</option>
+                            <option value="Revolted">Revolted</option>
+                            <option value="Agony">Agony</option>
+                            <option value="Hurt">Hurt</option>
+                            <option value="Depressed">Depressed</option>
+                            <option value="Sorrow">Sorrow</option>
+                            <option value="Dismayed">Dismayed</option>
+                            <option value="Displeased">Displeased</option>
+                            <option value="Regretful">Regretful</option>
+                            <option value="Guilty">Guilty</option>
+                            <option value="Isolated">Isolated</option>
+                            <option value="Lonely">Lonely</option>
+                            <option value="Grief">Grief</option>
+                            <option value="Powerless">Powerless</option>
+                            <option value="Shocked">Shocked</option>
+                            <option value="Disillusioned">Disillusioned</option>
+                            <option value="Perplexed">Perplexed</option>
+                            <option value="Astonished">Astonished</option>
+                            <option value="Awe-struck">Awe-struck</option>
+                            <option value="Speechless">Speechless</option>
+                            <option value="Astounded">Astounded</option>
+                            <option value="Stimulated">Stimulated</option>
+                            <option value="Touched">Touched</option>
+                            <option value="Pleased">Pleased</option>
+                            <option value="Satisfied">Satisfied</option>
+                            <option value="Amused">Amused</option>
+                            <option value="Delighted">Delighted</option>
+                            <option value="Jovial">Jovial</option>
+                            <option value="Blissful">Blissful</option>
+                            <option value="Triumphant">Triumphant</option>
+                            <option value="Illustrious">Illustrious</option>
+                            <option value="Eager">Eager</option>
+                            <option value="Hopeful">Hopeful</option>
+                            <option value="Excited">Excited</option>
+                            <option value="Zeal">Zeal</option>
+                            <option value="Euphoric">Euphoric</option>
+                            <option value="Jubilation">Jubilation</option>
+                            <option value="Enchanted">Enchanted</option>
+                            <option value="Rapture">Rapture</option>
+                            <option value="Romantic">Romantic</option>
+                            <option value="Fondness">Fondness</option>
+                            <option value="Sentimental">Sentimental</option>
+                            <option value="Attracted">Attracted</option>
+                            <option value="Passion">Passion</option>
+                            <option value="Infatuation">Infatuation</option>
+                            <option value="Caring">Caring</option>
+                            <option value="Compassionate">Compassionate</option>
+                            <option value="Relieved">Relieved</option>
+                            <option value="Frightened">Frightened</option>
+                            <option value="Helpless">Helpless</option>
+                            <option value="Panic">Panic</option>
+                            <option value="Hysterical">Hysterical</option>
+                            <option value="Inferior">Inferior</option>
+                            <option value="Inadequate">Inadequate</option>
+                            <option value="Worried">Worried</option>
+                            <option value="Anxious">Anxious</option>
+                            <option value="Mortified">Mortified</option>
+                            <option value="Dread">Dread</option>
+                        </select>
+                    </div>
                 </div>
-            )}
+                {/* Logging secondOption and its length  to make sure it it filtering correctly*/}
+                {console.log("Second Options:", secondOption)}
+                {console.log("Second Options Length:", secondOption.length)}
 
-            {/* Display for final selected emotion */}
-            {finalEmotion && (
+                {secondOption.length > 0 && (
+                    <div className="dropdown2">
+                        {/* second emotion */}
+                        <label>Select Secondary Emotion:</label>
+                        <select onChange={(e) => { setSecondEmotion(e.target.value); handleSecondEmotion(e); }}>
+                            <option value="">Select</option>
+                            {secondOption.map((option) => (
+                                <option key={option} value={option}>{option}</option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+
+                {/* Display for final selected emotion */}
+                {finalEmotion && (
+                    <div>
+                        <label>Final Selected Emotion:</label>
+                        <p>{finalEmotion}</p>
+                    </div>
+                )}
+
+                {/* included input for emotion intensity */}
                 <div>
-                    <label>Final Selected Emotion:</label>
-                    <p>{finalEmotion}</p>
+                    <label>Emotion Intensity:</label>
+                    <input type="text" value={emotionIntensity} onChange={(e) => setEmotionIntensity(e.target.value)} />
                 </div>
-            )}
 
-            {/* included input for emotion intensity */}
-            <div>
-                <label>Emotion Intensity:</label>
-                <input type="text" value={emotionIntensity} onChange={(e) => setEmotionIntensity(e.target.value)} />
+                {/* Display submission message if available */}
+                {submissionMessage ? (
+                    <div>
+                        <p>{submissionMessage}</p>
+                        <button className="rounded-full" onClick={handleDelete}>Delete Entire Emotion Log</button>
+                        <button className="rounded-full" onClick={handlePatch}>Update Emotion Intensity</button>
+                    </div>
+                ) : (
+                    <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mr-3" onClick={handlePostSubmit}>Submit</button>
+                )}
+
             </div>
 
-            {/* Display submission message if available */}
-            {submissionMessage ? (
-                <div>
-                    <p>{submissionMessage}</p>
-                    <button className="rounded-full" onClick={handleDelete}>Delete Entire Emotion Log</button>
-                    <button className="rounded-full" onClick={handlePatch}>Update Emotion Intensity</button>
-                </div>
-            ) : (
-                <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mr-3" onClick={handlePostSubmit}>Submit</button>
-            )}
 
-            </div>
-    
-            
 
         </div>
     );
