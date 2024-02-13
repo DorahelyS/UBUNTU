@@ -76,12 +76,12 @@ function UserSummary() {
             <div className="flex justify-center items-center h-screen">
                 <div className="border-4 border-black p-4">
                     <div className="grid grid-cols-13 grid-rows-32 gap-2">
-                        {emotionData.map((emotion, index) => (
-                            <div>
+                        {console.log('Emotion Data:', emotionData)}
+                        {emotionData.map((emotion, index) => ( 
                                 <div key={index} className="emotion-box w-6 h-6" style={{ backgroundColor: emotion.color }}>
                                     {/*<p>{emotion.color} </p> */}
                                 </div>
-                            </div>
+                        
                         ))}
                     </div>
                 </div>
