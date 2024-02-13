@@ -27,14 +27,17 @@ function CreateNewEmotion() {
 
     const [submissionMessage, setSubmissionMessage] = useState(null);
     const [emotionId, setEmotionId] = useState(null);
+
+    // not actually using these atm
     const [errorMessage, setErrorMessage] = useState('');
     const [patchMessage, setPatchMessage] = useState(null);
 
 
+    // for debugging
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
 
-    // first emotion 
+    // first emotion logic if this outer layer emotion then set the second options (inner layer)
     const handleFirstEmotion = (e) => {
         const selectedPrimaryEmotion = e.target.value;
         setPrimaryEmotion(selectedPrimaryEmotion);
@@ -141,7 +144,7 @@ function CreateNewEmotion() {
         }
     };
 
-    // second emotion
+    // second emotion ^ same logic as above if this second layer emotion then final emotion
     const handleSecondEmotion = (e) => {
         const selectedSecondEmotion = e.target.value;
         console.log('Selected Second Emotion:', selectedSecondEmotion);
@@ -166,7 +169,7 @@ function CreateNewEmotion() {
     const handlePostSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Step 1: Create Emotion
+            // Step 1: fetching all emotions
             const emotionResponse = await fetch('/emotions', {
                 method: 'POST',
                 headers: {
@@ -187,13 +190,14 @@ function CreateNewEmotion() {
             // storing id for later use - for patch & delete
             //setEmotionId(emotionId)
 
-            // Step 2: Create User Emotion using obtained emotionId
+            // Step 2: Create & storing User Emotion using obtained emotionId
             const userEmotionData = {
                 user_id: currentUser.id,
                 emotion_id: emotionId,
                 emotion_intensity: emotionIntensity
             };
 
+            // Step 2: Creating aka posting new emotion 
             const userEmotionResponse = await fetch('/user_emotion', {
                 method: 'POST',
                 headers: {
@@ -219,7 +223,8 @@ function CreateNewEmotion() {
                 emotionIntensity: emotionIntensity,
                 emotionId: userEmotionId
             });
-
+             
+            // frontend submission message
             setSubmissionMessage(`Your emotion ${finalEmotion} with intensity ${emotionIntensity} was submitted successfully.`)
 
             // Handle success or navigate to another page
@@ -227,7 +232,8 @@ function CreateNewEmotion() {
             console.error('Error:', error.message);
         }
     };
-
+    
+    // for updating emotion intensity upon submission 
     const handlePatch = async (e) => {
         e.preventDefault();
         if (!emotionId) {
@@ -260,6 +266,7 @@ function CreateNewEmotion() {
     }
 
 
+    // deleting entire logged emotion if for whatever reason user did not mean to submit etc
     const handleDelete = async (e) => {
         e.preventDefault();
         if (!emotionId) {
@@ -317,6 +324,7 @@ function CreateNewEmotion() {
                     <div className="dropdown1">
                         <label>Select Primary Emotion:</label>
                         <select onChange={(e) => { setPrimaryEmotion(e.target.value); setSecondEmotion(''); handleFirstEmotion(e); }}>
+                            {/* hardcoding first drop down options */}
                             <option value="">Select</option>
                             <option value="Hate">Hate</option>
                             <option value="Hostile">Hostile</option>
@@ -417,7 +425,7 @@ function CreateNewEmotion() {
                     <input type="text" value={emotionIntensity} onChange={(e) => setEmotionIntensity(e.target.value)} />
                 </div>
 
-                {/* Display submission message if available */}
+                {/* Displaying submission message if available */}
                 {submissionMessage ? (
                     <div>
                         <p>{submissionMessage}</p>

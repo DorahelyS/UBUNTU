@@ -16,28 +16,33 @@ function UserProfilePage() {
     // Extract currentUser from state, or default to null if it doesn't exist
     const currentUser = state && state.currentUser ? state.currentUser : null;
 
+    // Creating greeting message 
     const greetingMessage = currentUser ? `Hi, ${currentUser.username} ☀️ How are you feeling today?` : '';
 
 
-     // navigating back to log in
-     const handleNavigateToLogin = () => {
+    // navigating back to log in
+    const handleNavigateToLogin = () => {
         navigate('/', {
             state: { currentUser }
         });
     };
 
+    // navigating to new route
     const handleCreateNewEmotion = () => {
         navigate('/New-Emotion', {
             state: { currentUser }
         });
     };
 
+    
+    // navigationg to new route
     const handleNewJournal = () => {
         navigate('/New-Journal', {
             state: { currentUser }
         });
     };
 
+    // navigationg to new route
     const handleEmotionSummary = () => {
         navigate('/Emotion-Summary', {
             state: { currentUser }

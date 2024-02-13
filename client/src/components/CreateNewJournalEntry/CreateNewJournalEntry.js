@@ -12,10 +12,11 @@ function CreateNewJournalEntry() {
 
     const currentUser = state && state.currentUser ? state.currentUser : null;
 
-    // State variable to hold journal entries
+    // State variable to hold journal entries & submission message
     const [journalEntries, setJournalEntries] = useState([]);
     const [submissionMessage, setSubmissionMessage] = useState(null);
 
+    // for debugging
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
 
@@ -67,12 +68,14 @@ function CreateNewJournalEntry() {
         }
     });
 
+    // navigationg back to User-Profile
     const handleNavigateToUserProfile = () => {
         navigate('/User-Profile', {
             state: { currentUser }
         });
     };
 
+    // navigating back to log in 
     const handleNavigateToLogin = () => {
         navigate('/', {
             state: { currentUser }
@@ -107,7 +110,8 @@ function CreateNewJournalEntry() {
                 </form>
             </div>
     
-            {/* Optional: Display journal entries 
+            {/* Optional: Display journal entries if I want to display all the journal entries - stretch goal - would need a fetch statement 
+            would be better on a a new route - otherwise page will look too busy
             <div>
                 <h2>Journal Entries</h2>
                 <ul>

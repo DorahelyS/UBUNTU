@@ -12,6 +12,7 @@ function UserSummary() {
     const currentUser = state ? state.currentUser : null;
     const [emotionData, setEmotionData] = useState([]);
 
+    // for debugging
     console.log('Current pathname:', location.pathname);
     console.log("current state:", state);
 
@@ -34,6 +35,10 @@ function UserSummary() {
         }
     }, [currentUser]);
 
+/* having a hard time implenting this - will be a stretch goal can't get the emotion color which is logged to backend with date stamp to 
+sync with grid box - thought maybe I could do if backend date stamp matches frontend date stamp then create color 
+
+below: was trying to make each box in the grid by date stamp but did not work
 
     // Define calculateColumn and calculateRow functions
     const calculateColumn = (dateStamp) => {
@@ -46,14 +51,16 @@ function UserSummary() {
         const date = new Date(dateStamp);
         return date.getDate() + 1; // Add 1 to get the correct row index (dates start from 1)
     };
+*/
 
+    // navigating back to User-Profile
     const handleNavigateToUserProfile = () => {
         navigate('/User-Profile', {
             state: { currentUser }
         });
     };
 
-
+    // navigating back to log in
     const handleNavigateToLogin = () => {
         navigate('/', {
             state: { currentUser }
