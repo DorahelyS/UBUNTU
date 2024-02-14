@@ -91,7 +91,8 @@ function LoginForm() {
 
     // now that schema/validations/hook is in place need to put everything inside jsx
     return (
-        <div className="login-container">
+        
+        <div className="login-container mb-20">
             <form onSubmit={formik.handleSubmit}>
                 <div className="input-group mb-4">
                     <input

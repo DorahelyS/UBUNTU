@@ -67,26 +67,30 @@ function UserSummary() {
         });
     };
 
+
+
+
     return (
-        <div>
-            <div className="flex justify-end items-start mt-5 mr-5 space-x-4">
+        <div className="relative w-full h-screen bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('/border.png')" }}>
+            <div className="absolute top-0 right-0 mt-5 mr-5 space-x-4">
                 <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full " onClick={handleNavigateToUserProfile}>Home</button>
                 <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full " onClick={handleNavigateToLogin}>Logout</button>
             </div>
-            <div className="flex justify-center items-center h-screen">
-                <div className="border-4 border-black p-4">
+            <div className="flex justify-center items-center h-full">
+                <div className="border-2 border-red-200 p-4 ">
                     <div className="grid grid-cols-13 grid-rows-32 gap-2">
                         {console.log('Emotion Data:', emotionData)}
-                        {emotionData.map((emotion, index) => ( 
-                                <div key={index} className="emotion-box w-6 h-6" style={{ backgroundColor: emotion.color }}>
-                                    {/*<p>{emotion.color} </p> */}
-                                </div>
-                        
+                        {emotionData.map((emotion, index) => (
+                            <div key={index} className="emotion-box w-6 h-6" style={{ backgroundColor: emotion.color }}>
+                                {/*<p>{emotion.color} </p> */}
+                            </div>
                         ))}
                     </div>
                 </div>
             </div>
         </div>
+
+
     );
 }
 

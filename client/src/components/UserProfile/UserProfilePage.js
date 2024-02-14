@@ -34,7 +34,7 @@ function UserProfilePage() {
         });
     };
 
-    
+
     // navigationg to new route
     const handleNewJournal = () => {
         navigate('/New-Journal', {
@@ -59,9 +59,11 @@ function UserProfilePage() {
 
 
     return (
-        <div className="bg-emerald-50 flex flex-col items-center justify-start h-screen">
-            <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 " onClick={handleAbout}>About</button>
-            <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
+        <div className="bg-orange-50 flex flex-col items-center justify-start h-screen">
+            <div className="w-full flex justify-end">
+                <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 " onClick={handleAbout}>About</button>
+                <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
+            </div>
             <div className=" font-mono text-center font-bold mt-32 text-2xl">{greetingMessage}</div>
             <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleCreateNewEmotion}>Log </button>
             <button className="bg-red-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-10" onClick={handleNewJournal}>Write </button>
