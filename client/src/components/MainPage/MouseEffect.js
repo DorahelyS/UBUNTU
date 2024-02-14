@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../styling/MainPage.css'
+
 
 
 const MouseEffect = () => {
@@ -27,7 +27,7 @@ const MouseEffect = () => {
         <>
             {positions.map((position, index) => (
                 <div key={index} className="mouse-effect" style={{ left: position.x, top: position.y }} >
-                    🌸
+                    🔆
                 </div>
             ))}
         </>

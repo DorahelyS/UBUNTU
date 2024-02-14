@@ -83,7 +83,7 @@ function CreateNewJournalEntry() {
     };
 
     return (
-        <div>
+        <div className="w-full h-full bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('/border.png')" }}>
             <div className="flex justify-end">
                 <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full mt-5 mr-5" onClick={handleNavigateToUserProfile}>Home</button>
                 <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full mt-5 mr-5 self-end" onClick={handleNavigateToLogin}>Logout</button>
@@ -104,7 +104,9 @@ function CreateNewJournalEntry() {
                     {formik.errors.entry && <div className="error">{formik.errors.entry}</div>}
                     <div>
                         <p className="mt-5"> {submissionMessage} </p>
+                        {!submissionMessage && (
                         <button className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded-full mt-5" type="submit">Submit</button>
+                    )}
                     </div>
                 
                 </form>
