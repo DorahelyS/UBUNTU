@@ -28,7 +28,7 @@ function About() {
     };
     //returns what I want to see on the page - in this case the login form
     return (
-        <div className='about'>
+        <div className='bg-lime-100 flex flex-col '>
             <div className="flex justify-end items-start mt-5 mr-5 space-x-4">
                 <button className="bg-yellow-500 hover:bg-yellow-300 text-white py-2 px-4 rounded-full " onClick={handleNavigateToUserProfile}>Home</button>
                 <button className="bg-cyan-400 hover:bg-pink-300 text-white py-2 px-4 rounded-full " onClick={handleNavigateToLogin}>Logout</button>
@@ -48,7 +48,7 @@ function About() {
                     <li>Hierarchical Structure: Emotions can be organized hierarchically, with primary emotions forming the foundation for more complex emotional experiences.</li>
                     <li>Evolutionary Basis: Emotions have evolved over time and are shared across different cultures and species, reflecting common biological and evolutionary origins.</li>
                 </ol>
-                <p className="mt-5">There have been many adoptations, below is teh original wheel vs the one I followed:</p>
+                <p className="mt-5">There have been many adoptations, below is the adoptation I followed vs Plutchik's original:</p>
             </div>
             <div>
                 <img src="/emotionWheel1.png" alt="" className="mt-20 mx-auto" />

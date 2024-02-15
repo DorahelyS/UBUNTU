@@ -11,7 +11,7 @@ function MainPage() {
             <div className="flex flex-col items-center tems-center h-screen">
                 {/* Header */}
                 <h1 className="text-4xl font-bold text-white mt-5">UBUNTU</h1>
-                
+                <h2 className="text-2xl font-bold text-white mt-5">"I am because we are"</h2>
                 {/* Login Form */}
                 <LoginForm />
 

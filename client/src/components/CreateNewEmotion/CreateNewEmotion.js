@@ -466,7 +466,7 @@ function CreateNewEmotion() {
                                 <div >
                                     <p style={{ position: "absolute", bottom: "100px", left: "50%", transform: "translateX(-50%)" }}>{submissionMessage}</p>
                                     <button style={{ position: "absolute", bottom: "25px", left: "50%", transform: "translateX(-50%)" }} className=" bg-red-200 rounded-full px-6 py-1 mb-5" onClick={handleDelete}>Delete Entire Emotion Log?</button>
-                                    <button style={{ position: "absolute", bottom: "0px", left: "50%", transform: "translateX(-50%)" }} className="bg-red-200 rounded-full px-6 py-1" onClick={handlePatch}>Update Emotion Intensity?</button>
+                                    <button style={{ position: "absolute", bottom: "0px", left: "50%", transform: "translateX(-50%)" }} className="bg-red-200 rounded-full px-6 py-1 " onClick={handlePatch}>Update Emotion Intensity?</button>
                                 </div>
                             </div>
 
